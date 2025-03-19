@@ -11,6 +11,7 @@ import Dashboard from './components/Dashboard/Dashboard';
 import EquipList from './components/EquipList/EquipList.jsx';
 import EquipDetails from './components/EquipDetails/EquipDetails.jsx';
 import SheetDetails from './components/SheetDetails/SheetDetails';
+import SheetList from './components/SheetList/SheetList'
 
 import * as sheetService from './services/sheetService';
 
@@ -23,6 +24,10 @@ const App = () => {
   const [sheets, setSheets] = useState([]);
   const [selected, setSelected] = useState(null);
   const [equips, setEquips] = useState([])
+
+  const handleSelect = (sheet) => {
+    setSelected(sheet)
+  }
 
   useEffect(() => {
     const fetchSheets = async () => {
@@ -46,7 +51,7 @@ const App = () => {
       <NavBar/>
       <Routes> 
         <Route path='/' element={user ? <Navigate to={"/sheets"}/> : <Landing />} />
-        <Route path='/sheets' element={<Dashboard />} />
+        <Route path='/sheets' element={<SheetList sheets={sheets} handleSelect={handleSelect}/>} />
         <Route path='/sheets/:sheetId' element={<SheetDetails sheet={selected} />} />
         <Route path='/equips' element={<EquipList equips={equips} />} />
         <Route path='/equips/:equipId' element={<EquipDetails />} />
