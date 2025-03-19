@@ -1,21 +1,28 @@
 import { useContext, useEffect, useState } from 'react';
 import { Navigate, Routes, Route } from 'react-router';
 
+import * as equipService from './services/equipService.js'
+
 import NavBar from './components/NavBar/NavBar';
 import SignUpForm from './components/SignUpForm/SignUpForm';
 import SignInForm from './components/SignInForm/SignInForm';
 import Landing from './components/Landing/Landing';
 import Dashboard from './components/Dashboard/Dashboard';
+import EquipList from './components/EquipList/EquipList.jsx';
+import EquipDetails from './components/EquipDetails/EquipDetails.jsx';
 import SheetDetails from './components/SheetDetails/SheetDetails';
 
 import * as sheetService from './services/sheetService';
 
 import { UserContext } from './contexts/UserContext';
 
+
+
 const App = () => {
   const { user } = useContext(UserContext);
   const [sheets, setSheets] = useState([]);
   const [selected, setSelected] = useState(null);
+  const [equips, setEquips] = useState([])
 
   useEffect(() => {
     const fetchSheets = async () => {
@@ -32,6 +39,8 @@ const App = () => {
     fetchSheets();
   }, []);
 
+
+
   return (
     <>
       <NavBar/>
@@ -39,7 +48,9 @@ const App = () => {
         <Route path='/' element={user ? <Navigate to={"/sheets"}/> : <Landing />} />
         <Route path='/sheets' element={<Dashboard />} />
         <Route path='/sheets/:sheetId' element={<SheetDetails sheet={selected} />} />
-        <Route path='/equips' element={<Dashboard />} />
+        <Route path='/equips' element={<EquipList equips={equips} />} />
+        <Route path='/equips/:equipId' element={<EquipDetails />} />
+
         <Route path='/sign-up' element={<SignUpForm />} />
         <Route path='/sign-in' element={<SignInForm />} />
       </Routes>

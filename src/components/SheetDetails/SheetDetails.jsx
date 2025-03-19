@@ -2,12 +2,12 @@ import { Navigate, useParams } from "react-router";
 
 
 
-const SheetDetails = (props) => {
+const MailboxDetails = (props) => {
   const { mailboxId } = useParams();
   const selectedBox = props.mailboxes.find(m => m._id === +mailboxId);
 
   if (!selectedBox) { 
-    // return <Navigate to={"/mailboxes"}/>;
+    return <Navigate to={"/mailboxes"}/>;
     return <h1>Mailbox Not Found!</h1>
   }
 
