@@ -7,6 +7,7 @@ import SignInForm from './components/SignInForm/SignInForm';
 import Landing from './components/Landing/Landing';
 import Dashboard from './components/Dashboard/Dashboard';
 import SheetDetails from './components/SheetDetails/SheetDetails';
+import SheetList from './components/SheetList/SheetList'
 
 import * as sheetService from './services/sheetService';
 
@@ -16,6 +17,10 @@ const App = () => {
   const { user } = useContext(UserContext);
   const [sheets, setSheets] = useState([]);
   const [selected, setSelected] = useState(null);
+
+  const handleSelect = (sheet) => {
+    setSelected(sheet)
+  }
 
   useEffect(() => {
     const fetchSheets = async () => {
@@ -37,7 +42,7 @@ const App = () => {
       <NavBar/>
       <Routes> 
         <Route path='/' element={user ? <Navigate to={"/sheets"}/> : <Landing />} />
-        <Route path='/sheets' element={<Dashboard />} />
+        <Route path='/sheets' element={<SheetList sheets={sheets} handleSelect={handleSelect}/>} />
         <Route path='/sheets/:sheetId' element={<SheetDetails sheet={selected} />} />
         <Route path='/equips' element={<Dashboard />} />
         <Route path='/sign-up' element={<SignUpForm />} />
