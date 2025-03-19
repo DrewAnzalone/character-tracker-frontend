@@ -2,7 +2,7 @@ import { Navigate, useParams } from "react-router";
 
 
 
-const MailboxDetails = (props) => {
+const SheetDetails = (props) => {
   const { mailboxId } = useParams();
   const selectedBox = props.mailboxes.find(m => m._id === +mailboxId);
 
