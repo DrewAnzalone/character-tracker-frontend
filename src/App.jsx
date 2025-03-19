@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import { Routes, Route } from 'react-router';
+import { Navigate, Routes, Route } from 'react-router';
 
 import NavBar from './components/NavBar/NavBar';
 import SignUpForm from './components/SignUpForm/SignUpForm';
@@ -15,8 +15,11 @@ const App = () => {
   return (
     <>
       <NavBar/>
-      <Routes>
-        <Route path='/' element={user ? <Dashboard /> : <Landing />} />
+      <Routes> 
+        <Route path='/' element={user ? <Navigate to={"/sheets"}/> : <Landing />} />
+        <Route path='/sheets' element={<Dashboard />} />
+        <Route path='/sheets/:sheetId' element={<Dashboard />} />
+        <Route path='/equips' element={<Dashboard />} />
         <Route path='/sign-up' element={<SignUpForm />} />
         <Route path='/sign-in' element={<SignInForm />} />
       </Routes>
