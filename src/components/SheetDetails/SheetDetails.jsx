@@ -1,8 +1,6 @@
 // import { Link, Navigate, useParams } from "react-router";
 import { Link, Navigate } from "react-router";
 
-
-
 const SheetDetails = (props) => {
   // const { sheet } = useParams();
   if (!props.sheet) {
