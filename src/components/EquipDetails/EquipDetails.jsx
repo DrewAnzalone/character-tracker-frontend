@@ -19,16 +19,12 @@ useEffect(() => {
 
 return (
     <main>
-      <section>
         <header>
         <h2>{equip.name}</h2>
             <p>
              {`${equip.type} with +${equip.statValue} ${equip.statModify}`} 
             </p>
         </header>
-      </section>
-      <section>
-      </section>
     </main>
   );
   };
