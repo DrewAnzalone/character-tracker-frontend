@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from 'react';
-import { Navigate, Routes, Route } from 'react-router';
+import { Navigate, Routes, Route, Link } from 'react-router';
 
 import NavBar from './components/NavBar/NavBar';
 import SignUpForm from './components/SignUpForm/SignUpForm';
@@ -35,10 +35,13 @@ const App = () => {
   return (
     <>
       <NavBar/>
-      <Routes> 
+      {/* <p onClick={() => setSelected(sheets[0])}>set selected</p>
+      <Link to={"/sheets/hi"}>test details</Link> */}
+      {/* debug jsx code, can be removed almost any time */}
+      <Routes>
         <Route path='/' element={user ? <Navigate to={"/sheets"}/> : <Landing />} />
         <Route path='/sheets' element={<Dashboard />} />
-        <Route path='/sheets/:sheetId' element={<SheetDetails sheet={selected} />} />
+        <Route path='/sheets/*' element={<SheetDetails sheet={selected} />} />
         <Route path='/equips' element={<Dashboard />} />
         <Route path='/sign-up' element={<SignUpForm />} />
         <Route path='/sign-in' element={<SignInForm />} />
