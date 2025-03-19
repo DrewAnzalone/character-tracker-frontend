@@ -21,6 +21,7 @@ const App = () => {
   const { user } = useContext(UserContext);
   const [sheets, setSheets] = useState([]);
   const [selected, setSelected] = useState(null);
+  const [equips, setEquips] = useState([])
 
   useEffect(() => {
     const fetchSheets = async () => {
@@ -37,6 +38,8 @@ const App = () => {
     fetchSheets();
   }, []);
 
+
+
   return (
     <>
       <NavBar/>
@@ -44,7 +47,7 @@ const App = () => {
         <Route path='/' element={user ? <Navigate to={"/sheets"}/> : <Landing />} />
         <Route path='/sheets' element={<Dashboard />} />
         <Route path='/sheets/:sheetId' element={<SheetDetails sheet={selected} />} />
-        <Route path='/equips' element={<Dashboard />} />
+        <Route path='/equips' element={<EquipList equips={equips} />} />
         <Route path='/sign-up' element={<SignUpForm />} />
         <Route path='/sign-in' element={<SignInForm />} />
       </Routes>
