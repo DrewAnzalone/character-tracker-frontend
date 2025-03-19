@@ -9,6 +9,7 @@ import SignInForm from './components/SignInForm/SignInForm';
 import Landing from './components/Landing/Landing';
 import Dashboard from './components/Dashboard/Dashboard';
 import EquipList from './components/EquipList/EquipList.jsx';
+import EquipDetails from './components/EquipDetails/EquipDetails.jsx';
 import SheetDetails from './components/SheetDetails/SheetDetails';
 
 import * as sheetService from './services/sheetService';
@@ -48,6 +49,8 @@ const App = () => {
         <Route path='/sheets' element={<Dashboard />} />
         <Route path='/sheets/:sheetId' element={<SheetDetails sheet={selected} />} />
         <Route path='/equips' element={<EquipList equips={equips} />} />
+        <Route path='/equips/:equipId' element={<EquipDetails />} />
+
         <Route path='/sign-up' element={<SignUpForm />} />
         <Route path='/sign-in' element={<SignInForm />} />
       </Routes>
