@@ -1,17 +1,18 @@
 import { useContext, useEffect, useState } from 'react';
 import { Navigate, Routes, Route, Link, useNavigate } from 'react-router';
 
-import NavBar from './components/NavBar/NavBar';
-import SignUpForm from './components/SignUpForm/SignUpForm';
-import SignInForm from './components/SignInForm/SignInForm';
-import Landing from './components/Landing/Landing';
-import Dashboard from './components/Dashboard/Dashboard';
+import NavBar from './components/NavBar/NavBar.jsx';
+import SignUpForm from './components/SignUpForm/SignUpForm.jsx';
+import SignInForm from './components/SignInForm/SignInForm.jsx';
+import Landing from './components/Landing/Landing.jsx';
+import Dashboard from './components/Dashboard/Dashboard.jsx';
 import EquipList from './components/EquipList/EquipList.jsx';
 import EquipDetails from './components/EquipDetails/EquipDetails.jsx';
 import EquipForm from './components/EquipForm/EquipForm.jsx';
-import SheetDetails from './components/SheetDetails/SheetDetails';
-import SheetList from './components/SheetList/SheetList'
-import SheetForm from './components/SheetForm/SheetForm'
+import SheetDetails from './components/SheetDetails/SheetDetails.jsx';
+import SheetList from './components/SheetList/SheetList.jsx';
+import SheetForm from './components/SheetForm/SheetForm.jsx';
+import EquipModal from './components/EquipModal/EquipModal.jsx';
 
 import * as sheetService from './services/sheetService';
 import * as equipService from './services/equipService.js'
@@ -25,6 +26,7 @@ const App = () => {
   const [selected, setSelected] = useState(null);
   const [equips, setEquips] = useState([])
   const [selectedEquip, setSelectedEquip] = useState(null);
+  const [modalActive, setModalActive] = useState(false);
 
   useEffect(() => {
     const fetchSheets = async () => {
@@ -70,13 +72,18 @@ const App = () => {
     navigate(`/equips/${newEquip._id}`);
   }
 
+  const toggleModal = (equip) => {
+    setModalActive(!modalActive);
+    setSelectedEquip(equip);
+  }
+
   return (
     <>
       <NavBar />
       <Routes>
         <Route path='/' element={user ? <Navigate to={"/sheets"} /> : <Landing />} />
         <Route path='/sheets' element={!user ? <Navigate to={"/"} /> : <SheetList sheets={sheets} handleSelect={(sheet) => setSelected(sheet)} />} />
-        <Route path='/sheets/*' element={<SheetDetails sheet={selected} />} />
+        <Route path='/sheets/:sheetId' element={<SheetDetails sheet={selected} handleSelect={toggleModal} />} />
         <Route path='/sheets/new' element={<SheetForm handleAddSheet={handleAddSheet} />} />
         <Route path='/equips' element={<EquipList equips={equips} handleSelect={(equip) => setSelectedEquip(equip)} />} />
         <Route path='/equips/:equipId' element={<EquipDetails equip={selectedEquip} />} />
@@ -84,6 +91,8 @@ const App = () => {
         <Route path='/sign-up' element={<SignUpForm />} />
         <Route path='/sign-in' element={<SignInForm />} />
       </Routes>
+      {modalActive && <h1> modal active </h1>}
+      {modalActive && <EquipModal equip={selectedEquip} handleModal={toggleModal} />}
     </>
   );
 };
