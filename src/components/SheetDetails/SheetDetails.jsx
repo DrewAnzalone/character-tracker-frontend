@@ -35,12 +35,12 @@ const SheetDetails = (props) => {
       </div>
       <div>
         {equips.map(equip =>
-          <Link
+          <div
             key={equip._id}
-            to={`/sheets/${props.sheet._id}/${equip._id}`}
+            onClick={() => props.handleSelect(equip)}
           >
             <p>{equip.name}</p>
-          </Link>
+          </div>
         )}
       </div>
     </>
