@@ -1,21 +1,19 @@
 import { Link } from 'react-router';
 
 const EquipList = (props) => {
-return (
-    <main>
-      {props.equips.map((equip) => (
-        <Link key={equip._id} to={`/equips/${equip._id}`}>
-          <article>
-            <header>
-            <h2>{equip.name}</h2>
-            <p>
-                {`${equip.type} with +${equip.statValue} ${equip.statModify}`} 
-            </p>
-            </header>
-          </article>
+  return (
+    <>
+      {props.equips.map(equip =>
+        <Link onClick={props.handleSelect(equip)} key={equip._id} to={`/equips/${equip._id}`}>
+          {/* <tr> */}
+          <h2>{equip.name}</h2>
+          <p>
+            {`${equip.type} with +${equip.statValue} ${equip.statModify}`}
+          </p>
+          {/* </tr> */}
         </Link>
-      ))}
-    </main>
+      )}
+    </>
   );
 }
 

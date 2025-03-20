@@ -1,8 +1,6 @@
 import { useContext, useEffect, useState } from 'react';
 import { Navigate, Routes, Route, Link } from 'react-router';
 
-import * as equipService from './services/equipService.js'
-
 import NavBar from './components/NavBar/NavBar';
 import SignUpForm from './components/SignUpForm/SignUpForm';
 import SignInForm from './components/SignInForm/SignInForm';
@@ -14,20 +12,16 @@ import SheetDetails from './components/SheetDetails/SheetDetails';
 import SheetList from './components/SheetList/SheetList'
 
 import * as sheetService from './services/sheetService';
+import * as equipService from './services/equipService.js'
 
 import { UserContext } from './contexts/UserContext';
-
-
 
 const App = () => {
   const { user } = useContext(UserContext);
   const [sheets, setSheets] = useState([]);
   const [selected, setSelected] = useState(null);
   const [equips, setEquips] = useState([])
-
-  const handleSelect = (sheet) => {
-    setSelected(sheet)
-  }
+  const [selectedEquip, setSelectedEquip] = useState(null);
 
   useEffect(() => {
     const fetchSheets = async () => {
@@ -42,22 +36,32 @@ const App = () => {
       }
     };
     fetchSheets();
+  }, [user]);
+
+  useEffect(() => {
+    const fetchEquips = async () => {
+      try {
+        const fetchedEquips = await equipService.index();
+        if (fetchedEquips.err) {
+          throw new Error(fetchedEquips.err);
+        }
+        setEquips(fetchedEquips);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    fetchEquips();
   }, []);
-
-
 
   return (
     <>
-      <NavBar/>
-      {/* <p onClick={() => setSelected(sheets[0])}>set selected</p>
-      <Link to={"/sheets/hi"}>test details</Link> */}
-      {/* debug jsx code, can be removed almost any time */}
+      <NavBar />
       <Routes>
-        <Route path='/' element={user ? <Navigate to={"/sheets"}/> : <Landing />} />
-        <Route path='/sheets' element={<SheetList sheets={sheets} handleSelect={handleSelect}/>} />
+        <Route path='/' element={user ? <Navigate to={"/sheets"} /> : <Landing />} />
+        <Route path='/sheets' element={!user ? <Navigate to={"/"} /> : <SheetList sheets={sheets} handleSelect={(sheet) => setSelected(sheet)} />} />
         <Route path='/sheets/*' element={<SheetDetails sheet={selected} />} />
-        <Route path='/equips' element={<EquipList equips={equips} />} />
-        <Route path='/equips/:equipId' element={<EquipDetails />} />
+        <Route path='/equips' element={<EquipList equips={equips} handleSelect={(equip) => setSelectedEquip(equip)} />} />
+        <Route path='/equips/:equipId' element={<EquipDetails equip={selectedEquip} />} />
         <Route path='/sign-up' element={<SignUpForm />} />
         <Route path='/sign-in' element={<SignInForm />} />
       </Routes>
