@@ -9,62 +9,66 @@ const index = async () => {
   }
 };
 
-const show = async (equipId) => {
-    try {
-      const res = await fetch(`${BASE_URL}/${equipId}`, {
-        headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
-      });
-      return res.json();
-    } catch (error) {
-      console.log(error);
-    }
-  };
-  
+// const show = async (equipId) => {
+//     try {
+//       const res = await fetch(`${BASE_URL}/${equipId}`, {
+//         headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
+//       });
+//       return res.json();
+//     } catch (error) {
+//       console.log(error);
+//     }
+//   };
+
 
 async function create(formData) {
   try {
     const res = await fetch(BASE_URL, {
       method: "POST",
-      headers: { 'Content-Type': 'application/json' },
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${localStorage.getItem('token')}`,
+      },
       body: JSON.stringify(formData),
     });
 
-    return res.json(); 
+    return res.json();
   } catch (err) {
     console.log(err);
   }
 }
 
-async function update(formData, id) {
-  // try {
-  //   const res = await fetch(`${BASE_URL}/${id}`, {
-  //     method: "PUT",
-  //     headers: { 'Content-Type': 'application/json' },
-  //     body: JSON.stringify(formData),
-  //   });
+// async function update(formData, id) {
+// try {
+//   const res = await fetch(`${BASE_URL}/${id}`, {
+//     method: "PUT",
+//     headers: { 'Content-Type': 'application/json' },
+//     body: JSON.stringify(formData),
+//   });
 
-  //   return res.json(); 
-  // } catch (err) {
-  //   console.log(err);
-  // }
-}
+//   return res.json(); 
+// } catch (err) {
+//   console.log(err);
+// }
+// }
 
 async function deleteSheet(id) {
-  // try {
-  //   const res = await fetch(`${BASE_URL}/${id}`, {
-  //     method: "DELETE",
-  //   });
+  try {
+    const res = await fetch(`${BASE_URL}/${id}`, {
+      headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
+      method: "DELETE",
+    });
 
-  //   return res.json(); 
-  // } catch (err) {
-  //   console.log(err);
-  // }
+    return res.json();
+  } catch (err) {
+    console.log(err);
+  }
 }
 
 export {
   index,
-  show,
+  // show,
   create,
-  update,
+  // update,
   deleteSheet,
 };

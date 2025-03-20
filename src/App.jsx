@@ -8,6 +8,7 @@ import Landing from './components/Landing/Landing';
 import Dashboard from './components/Dashboard/Dashboard';
 import EquipList from './components/EquipList/EquipList.jsx';
 import EquipDetails from './components/EquipDetails/EquipDetails.jsx';
+import EquipForm from './components/EquipForm/EquipForm.jsx';
 import SheetDetails from './components/SheetDetails/SheetDetails';
 import SheetList from './components/SheetList/SheetList'
 import SheetForm from './components/SheetForm/SheetForm'
@@ -19,6 +20,7 @@ import { UserContext } from './contexts/UserContext';
 
 const App = () => {
   const { user } = useContext(UserContext);
+  const navigate = useNavigate();
   const [sheets, setSheets] = useState([]);
   const [selected, setSelected] = useState(null);
   const [equips, setEquips] = useState([])
@@ -58,6 +60,13 @@ const App = () => {
     console.log('sheetFormData', sheetFormData)
     navigate('/sheets')
   }
+  
+  const handleAddEquip = async (equipFormData) => {
+    const newEquip = await equipService.create(equipFormData);
+    setEquips([newEquip, ...equips]);
+    setSelectedEquip(newEquip);
+    navigate(`/equips${newEquip._id}`);
+  }
 
   return (
     <>
@@ -69,6 +78,7 @@ const App = () => {
         <Route path='/sheets/new' element={<SheetForm handleAddSheet={handleAddSheet}/>}/>
         <Route path='/equips' element={<EquipList equips={equips} handleSelect={(equip) => setSelectedEquip(equip)} />} />
         <Route path='/equips/:equipId' element={<EquipDetails equip={selectedEquip} />} />
+        <Route path='/equips/new' element={<EquipForm handleAddEquip={handleAddEquip}/>} />
         <Route path='/sign-up' element={<SignUpForm />} />
         <Route path='/sign-in' element={<SignInForm />} />
       </Routes>
