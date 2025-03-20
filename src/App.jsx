@@ -70,14 +70,27 @@ const App = () => {
     navigate(`/equips/${newEquip._id}`);
   }
 
+  const handleUpdateSheet = async (sheetId, sheetFormData) => {
+    const updatedSheet = await sheetService.update(sheetId, sheetFormData)
+    setSheets(sheets.map((sheet) => (sheetId === sheet._id ? updatedSheet : sheet)))
+    navigate(`/sheets/${sheetId}`)
+  }
+
+  const handleDeleteSheet = async (sheetId) => {
+    const deletedSheet = await sheetService.deleteSheet(sheetId)
+    setSheets(sheets.filter((sheet) => sheet._id !== deletedSheet._id))
+    navigate('/sheets')
+  }
+
   return (
     <>
       <NavBar />
       <Routes>
         <Route path='/' element={user ? <Navigate to={"/sheets"} /> : <Landing />} />
         <Route path='/sheets' element={!user ? <Navigate to={"/"} /> : <SheetList sheets={sheets} handleSelect={(sheet) => setSelected(sheet)} />} />
-        <Route path='/sheets/*' element={<SheetDetails sheet={selected} />} />
+        <Route path='/sheets/*' element={<SheetDetails sheet={selected} handleDeleteSheet={handleDeleteSheet}/>} />
         <Route path='/sheets/new' element={<SheetForm handleAddSheet={handleAddSheet} />} />
+        <Route path='/sheets/:sheetId/edit' element={<SheetForm handleUpdateSheet={handleUpdateSheet}/>}/>
         <Route path='/equips' element={<EquipList equips={equips} handleSelect={(equip) => setSelectedEquip(equip)} />} />
         <Route path='/equips/:equipId' element={<EquipDetails equip={selectedEquip} />} />
         <Route path='/equips/new' element={<EquipForm handleAddEquip={handleAddEquip} />} />
