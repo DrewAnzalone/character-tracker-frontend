@@ -10,6 +10,7 @@ import Landing from './components/Landing/Landing';
 import Dashboard from './components/Dashboard/Dashboard';
 import EquipList from './components/EquipList/EquipList.jsx';
 import EquipDetails from './components/EquipDetails/EquipDetails.jsx';
+import EquipForm from './components/EquipForm/EquipForm.jsx';
 import SheetDetails from './components/SheetDetails/SheetDetails';
 import SheetList from './components/SheetList/SheetList'
 
@@ -58,6 +59,7 @@ const App = () => {
         <Route path='/sheets/*' element={<SheetDetails sheet={selected} />} />
         <Route path='/equips' element={<EquipList equips={equips} />} />
         <Route path='/equips/:equipId' element={<EquipDetails />} />
+        <Route path='/equips/new' element={<EquipForm />} />
         <Route path='/sign-up' element={<SignUpForm />} />
         <Route path='/sign-in' element={<SignInForm />} />
       </Routes>
