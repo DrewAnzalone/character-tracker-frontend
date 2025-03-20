@@ -5,7 +5,7 @@ const SheetList = (props) => {
     <>
       <Link to='/sheets/new'>Create Sheet</Link>
       {props.sheets.map(sheet =>
-        <Link onClick={props.handleSelect(sheet)} key={sheet._id} to={`/sheets/${sheet._id}`}>
+        <Link onClick={() => props.handleSelect(sheet)} key={sheet._id} to={`/sheets/${sheet._id}`}>
           <h3>{sheet.name}</h3>
           {/* Possible picture In future */}
           <h3>Level {sheet.level} {sheet.class}</h3>
