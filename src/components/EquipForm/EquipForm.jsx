@@ -3,9 +3,9 @@ import { useState } from 'react';
 const EquipForm = (props) => {
   const [formData, setFormData] = useState({
     name: '',
-    types: '',
-    statModify: '',
-    statValue: '',
+    type: 'Armor',
+    statModify: 'baseHP',
+    statValue: 0,
   });
 
   const handleChange = (evt) => {
@@ -14,6 +14,7 @@ const EquipForm = (props) => {
 
 const handleSubmit = (evt) => {
     evt.preventDefault();
+    props.handleAddEquip(formData);
     props.handleAddEquip(formData);
   };
 
@@ -30,12 +31,12 @@ const handleSubmit = (evt) => {
           value={formData.name}
           onChange={handleChange}
         />
-        <label htmlFor='type-input'>Types</label>
+        <label htmlFor='type-input'>Type</label>
         <select
           required
           name='type'
           id='type-input'
-          value={formData.types}
+          value={formData.type}
           onChange={handleChange}
         >
           <option value='Armor'>Armor</option>

@@ -11,6 +11,7 @@ import EquipDetails from './components/EquipDetails/EquipDetails.jsx';
 import EquipForm from './components/EquipForm/EquipForm.jsx';
 import SheetDetails from './components/SheetDetails/SheetDetails';
 import SheetList from './components/SheetList/SheetList'
+import SheetForm from './components/SheetForm/SheetForm'
 
 import * as sheetService from './services/sheetService';
 import * as equipService from './services/equipService.js'
@@ -55,6 +56,13 @@ const App = () => {
     fetchEquips();
   }, []);
 
+  const handleAddSheet = async (sheetFormData) => {
+    const newSheet = await sheetService.create(sheetFormData);
+    setSheets([newSheet, ...sheets]);
+    setSelected(newSheet);
+    navigate(`/sheets/${newSheet._id}`)
+  }
+
   const handleAddEquip = async (equipFormData) => {
     const newEquip = await equipService.create(equipFormData);
     setEquips([newEquip, ...equips]);
@@ -62,11 +70,12 @@ const App = () => {
     navigate(`/equips${newEquip._id}`);
   }
 
-  const handleDeleteEquip = async (equipId) => {
-    const deleteEquip = await equipService.deleteEquip(equipId);
-    setEquips(equips.filter((equip) => equip._id !== equipId));
-    navigate('/equips');
-  }
+const handleDeleteEquip = async (equipId) => {
+  const deletedEquip = await equipService.deleteEquip(equipId);
+  setEquips(equips.filter((equip) => equip._id !== deletedEquip._id));
+  navigate('/equips');
+};
+
 
   return (
     <>
@@ -75,6 +84,7 @@ const App = () => {
         <Route path='/' element={user ? <Navigate to={"/sheets"} /> : <Landing />} />
         <Route path='/sheets' element={!user ? <Navigate to={"/"} /> : <SheetList sheets={sheets} handleSelect={(sheet) => setSelected(sheet)} />} />
         <Route path='/sheets/*' element={<SheetDetails sheet={selected} />} />
+        <Route path='/sheets/new' element={<SheetForm handleAddSheet={handleAddSheet} />} />
         <Route path='/equips' element={<EquipList equips={equips} handleSelect={(equip) => setSelectedEquip(equip)} />} />
         <Route path='/equips/:equipId' element={<EquipDetails equip={selectedEquip} />} />
         <Route path='/equips/:equipId' element={<EquipDetails handleDeleteEquip={handleDeleteEquip} />} />
