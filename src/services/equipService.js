@@ -65,10 +65,25 @@ async function deleteSheet(id) {
   }
 }
 
+const deleteEquip = async (equipId) => {
+  try {
+    const res = await fetch(`${BASE_URL}/${equipId}`, {
+      method: 'DELETE',
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('token')}`,
+      },
+    });
+    return res.json();
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 export {
   index,
   // show,
   create,
   // update,
   deleteSheet,
+  deleteEquip,
 };

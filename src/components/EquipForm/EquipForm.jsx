@@ -14,7 +14,7 @@ const EquipForm = (props) => {
 
 const handleSubmit = (evt) => {
     evt.preventDefault();
-    props.handleAddHoot(formData);
+    props.handleAddEquip(formData);
   };
 
 
@@ -30,11 +30,11 @@ const handleSubmit = (evt) => {
           value={formData.name}
           onChange={handleChange}
         />
-        <label htmlFor='types-input'>Types</label>
+        <label htmlFor='type-input'>Types</label>
         <select
           required
-          name='types'
-          id='types-input'
+          name='type'
+          id='type-input'
           value={formData.types}
           onChange={handleChange}
         >
@@ -62,7 +62,7 @@ const handleSubmit = (evt) => {
           value={formData.statModify}
           onChange={handleChange}
         >
-          <option value='baseHp'>baseHp</option>
+          <option value='baseHP'>baseHP</option>
           <option value='baseAtk'>baseAtk</option>
           <option value='baseDef'>baseDef</option>
           <option value='baseMagic'>baseMagic</option>

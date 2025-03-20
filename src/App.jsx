@@ -62,6 +62,12 @@ const App = () => {
     navigate(`/equips${newEquip._id}`);
   }
 
+  const handleDeleteEquip = async (equipId) => {
+    const deleteEquip = await equipService.deleteEquip(equipId);
+    setEquips(equips.filter((equip) => equip._id !== equipId));
+    navigate('/equips');
+  }
+
   return (
     <>
       <NavBar />
@@ -71,6 +77,7 @@ const App = () => {
         <Route path='/sheets/*' element={<SheetDetails sheet={selected} />} />
         <Route path='/equips' element={<EquipList equips={equips} handleSelect={(equip) => setSelectedEquip(equip)} />} />
         <Route path='/equips/:equipId' element={<EquipDetails equip={selectedEquip} />} />
+        <Route path='/equips/:equipId' element={<EquipDetails handleDeleteEquip={handleDeleteEquip} />} />
         <Route path='/equips/new' element={<EquipForm handleAddEquip={handleAddEquip}/>} />
         <Route path='/sign-up' element={<SignUpForm />} />
         <Route path='/sign-in' element={<SignInForm />} />
