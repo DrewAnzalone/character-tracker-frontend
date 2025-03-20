@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from 'react';
-import { Navigate, Routes, Route, Link } from 'react-router';
+import { Navigate, Routes, Route, Link, useNavigate } from 'react-router';
 
 import * as equipService from './services/equipService.js'
 
@@ -45,7 +45,13 @@ const App = () => {
     fetchSheets();
   }, []);
 
+  const navigate = useNavigate();
 
+  const handleAddEquip = async (equipFormData) => {
+    const newEquip = await equipService.create(equipFormData);
+    setEquips([newEquip, ...equips]);
+    navigate('/equips');
+  }
 
   return (
     <>
@@ -59,7 +65,7 @@ const App = () => {
         <Route path='/sheets/*' element={<SheetDetails sheet={selected} />} />
         <Route path='/equips' element={<EquipList equips={equips} />} />
         <Route path='/equips/:equipId' element={<EquipDetails />} />
-        <Route path='/equips/new' element={<EquipForm />} />
+        <Route path='/equips/new' element={<EquipForm handleAddEquip={handleAddEquip}/>} />
         <Route path='/sign-up' element={<SignUpForm />} />
         <Route path='/sign-in' element={<SignInForm />} />
       </Routes>

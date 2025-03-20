@@ -12,11 +12,11 @@ const EquipForm = (props) => {
     setFormData({ ...formData, [evt.target.name]: evt.target.value });
   };
 
-  const handleSubmit = (evt) => {
+const handleSubmit = (evt) => {
     evt.preventDefault();
-    console.log('formData', formData);
-    // We'll update this function shortly...
+    props.handleAddHoot(formData);
   };
+
 
   return (
     <main>
