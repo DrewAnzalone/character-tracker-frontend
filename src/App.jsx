@@ -57,15 +57,17 @@ const App = () => {
   }, []);
 
   const handleAddSheet = async (sheetFormData) => {
-    console.log('sheetFormData', sheetFormData)
-    navigate('/sheets')
+    const newSheet = await sheetService.create(sheetFormData);
+    setSheets([newSheet, ...sheets]);
+    setSelected(newSheet);
+    navigate(`/sheets/${newSheet._id}`)
   }
-  
+
   const handleAddEquip = async (equipFormData) => {
     const newEquip = await equipService.create(equipFormData);
     setEquips([newEquip, ...equips]);
     setSelectedEquip(newEquip);
-    navigate(`/equips${newEquip._id}`);
+    navigate(`/equips/${newEquip._id}`);
   }
 
   return (
@@ -75,10 +77,10 @@ const App = () => {
         <Route path='/' element={user ? <Navigate to={"/sheets"} /> : <Landing />} />
         <Route path='/sheets' element={!user ? <Navigate to={"/"} /> : <SheetList sheets={sheets} handleSelect={(sheet) => setSelected(sheet)} />} />
         <Route path='/sheets/*' element={<SheetDetails sheet={selected} />} />
-        <Route path='/sheets/new' element={<SheetForm handleAddSheet={handleAddSheet}/>}/>
+        <Route path='/sheets/new' element={<SheetForm handleAddSheet={handleAddSheet} />} />
         <Route path='/equips' element={<EquipList equips={equips} handleSelect={(equip) => setSelectedEquip(equip)} />} />
         <Route path='/equips/:equipId' element={<EquipDetails equip={selectedEquip} />} />
-        <Route path='/equips/new' element={<EquipForm handleAddEquip={handleAddEquip}/>} />
+        <Route path='/equips/new' element={<EquipForm handleAddEquip={handleAddEquip} />} />
         <Route path='/sign-up' element={<SignUpForm />} />
         <Route path='/sign-in' element={<SignInForm />} />
       </Routes>
