@@ -1,33 +1,19 @@
-import { useState, useEffect } from 'react';
-import { useParams } from 'react-router';
-import * as equipService from '../../services/equipService';
+import { Navigate } from "react-router";
 
 const EquipDetail = (props) => {
-    const [equip, setEquip] = useState(null);
+  if (!props.equip) {
+    console.log("No equip selected");
+    return <Navigate to={"/equips"} />;
+  }
 
-    const { equipId } = useParams();
-    if(!equip) return <main>Loading...</main>;
-
-useEffect(() => {
-    const fetchEquip = async () => {
-        const equipData = await equipService.show(equipId);
-        setEquip(equipData);
-    };
-    fetchEquip();
-}, [equipId]);
-
-
-return (
-    <main>
-        <header>
-        <h2>{equip.name}</h2>
-            <p>
-             {`${equip.type} with +${equip.statValue} ${equip.statModify}`} 
-            </p>
-        </header>
-    </main>
+  return (
+    <>
+      <h2>{props.equip.name}</h2>
+      <p>
+        {`${props.equip.type} with +${props.equip.statValue} ${props.equip.statModify}`}
+      </p>
+    </>
   );
-  };
-  
-  export default EquipDetail;
-  
+};
+
+export default EquipDetail;

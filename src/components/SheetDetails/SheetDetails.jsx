@@ -37,7 +37,7 @@ const SheetDetails = (props) => {
         {equips.map(equip =>
           <Link
             key={equip._id}
-            to={`/sheet/${props.sheet._id}/${equip._id}`}
+            to={`/sheets/${props.sheet._id}/${equip._id}`}
           >
             <p>{equip.name}</p>
           </Link>
