@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from 'react';
-import { Navigate, Routes, Route, Link } from 'react-router';
+import { Navigate, Routes, Route, Link, useNavigate } from 'react-router';
 
 import NavBar from './components/NavBar/NavBar';
 import SignUpForm from './components/SignUpForm/SignUpForm';
@@ -10,6 +10,7 @@ import EquipList from './components/EquipList/EquipList.jsx';
 import EquipDetails from './components/EquipDetails/EquipDetails.jsx';
 import SheetDetails from './components/SheetDetails/SheetDetails';
 import SheetList from './components/SheetList/SheetList'
+import SheetForm from './components/SheetForm/SheetForm'
 
 import * as sheetService from './services/sheetService';
 import * as equipService from './services/equipService.js'
@@ -53,6 +54,11 @@ const App = () => {
     fetchEquips();
   }, []);
 
+  const handleAddSheet = async (sheetFormData) => {
+    console.log('sheetFormData', sheetFormData)
+    navigate('/sheets')
+  }
+
   return (
     <>
       <NavBar />
@@ -60,6 +66,7 @@ const App = () => {
         <Route path='/' element={user ? <Navigate to={"/sheets"} /> : <Landing />} />
         <Route path='/sheets' element={!user ? <Navigate to={"/"} /> : <SheetList sheets={sheets} handleSelect={(sheet) => setSelected(sheet)} />} />
         <Route path='/sheets/*' element={<SheetDetails sheet={selected} />} />
+        <Route path='/sheets/new' element={<SheetForm handleAddSheet={handleAddSheet}/>}/>
         <Route path='/equips' element={<EquipList equips={equips} handleSelect={(equip) => setSelectedEquip(equip)} />} />
         <Route path='/equips/:equipId' element={<EquipDetails equip={selectedEquip} />} />
         <Route path='/sign-up' element={<SignUpForm />} />
