@@ -1,5 +1,3 @@
-// src/components/HootForm/HootForm.jsx
-
 import { useState } from 'react';
 
 const EquipForm = (props) => {
