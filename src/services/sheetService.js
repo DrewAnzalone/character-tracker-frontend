@@ -28,16 +28,16 @@ async function create(formData) {
   }
 }
 
-const show = async (sheetId) => {
-  try {
-    const res = await fetch(`${BASE_URL}/${sheetId}`, {
-      headers: {Authorization: `Bearer ${localStorage.getItem('token')}`},
-    })
-    return res.json()
-  } catch (err) {
-    console.log(err)
-  }
-}
+// const show = async (sheetId) => {
+//   try {
+//     const res = await fetch(`${BASE_URL}/${sheetId}`, {
+//       headers: {Authorization: `Bearer ${localStorage.getItem('token')}`},
+//     })
+//     return res.json()
+//   } catch (err) {
+//     console.log(err)
+//   }
+// }
 
 async function update(formData, id) {
   try {
@@ -72,7 +72,7 @@ async function deleteSheet(id) {
 export {
   index,
   create,
-  show,
+  // show,
   update,
   deleteSheet,
 };
