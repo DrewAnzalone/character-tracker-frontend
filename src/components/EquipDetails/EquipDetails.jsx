@@ -12,6 +12,10 @@ const EquipDetail = (props) => {
       <p>
         {`${props.equip.type} with +${props.equip.statValue} ${props.equip.statModify}`}
       </p>
+
+      {<button onClick={() => props.handleDeleteEquip(props.equip._id)}>
+        Delete
+      </button>}
     </>
   );
 };

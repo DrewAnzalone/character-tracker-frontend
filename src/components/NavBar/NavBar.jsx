@@ -18,7 +18,8 @@ const NavBar = () => {
           <li>Welcome, {user.username}</li>
           <li><Link to='/sheets'>Dashboard</Link></li>
           <li><Link to='/' onClick={handleSignOut}>Sign Out</Link></li>
-          <li><Link to='/equips'>Equipment</Link></li>
+          <li><Link to='/equips'>Equips</Link></li>
+          <li><Link to='/equips/new'>New Equip</Link></li>
         </ul>
         :
         <ul>

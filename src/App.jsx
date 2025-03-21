@@ -1,15 +1,18 @@
 import { useContext, useEffect, useState } from 'react';
-import { Navigate, Routes, Route, Link } from 'react-router';
+import { Navigate, Routes, Route, Link, useNavigate } from 'react-router';
 
-import NavBar from './components/NavBar/NavBar';
-import SignUpForm from './components/SignUpForm/SignUpForm';
-import SignInForm from './components/SignInForm/SignInForm';
-import Landing from './components/Landing/Landing';
-import Dashboard from './components/Dashboard/Dashboard';
+import NavBar from './components/NavBar/NavBar.jsx';
+import SignUpForm from './components/SignUpForm/SignUpForm.jsx';
+import SignInForm from './components/SignInForm/SignInForm.jsx';
+import Landing from './components/Landing/Landing.jsx';
+import Dashboard from './components/Dashboard/Dashboard.jsx';
 import EquipList from './components/EquipList/EquipList.jsx';
 import EquipDetails from './components/EquipDetails/EquipDetails.jsx';
-import SheetDetails from './components/SheetDetails/SheetDetails';
-import SheetList from './components/SheetList/SheetList'
+import EquipForm from './components/EquipForm/EquipForm.jsx';
+import SheetDetails from './components/SheetDetails/SheetDetails.jsx';
+import SheetList from './components/SheetList/SheetList.jsx';
+import SheetForm from './components/SheetForm/SheetForm.jsx';
+import EquipModal from './components/EquipModal/EquipModal.jsx';
 
 import * as sheetService from './services/sheetService';
 import * as equipService from './services/equipService.js'
@@ -18,10 +21,12 @@ import { UserContext } from './contexts/UserContext';
 
 const App = () => {
   const { user } = useContext(UserContext);
+  const navigate = useNavigate();
   const [sheets, setSheets] = useState([]);
   const [selected, setSelected] = useState(null);
   const [equips, setEquips] = useState([])
   const [selectedEquip, setSelectedEquip] = useState(null);
+  const [modalActive, setModalActive] = useState(false);
 
   useEffect(() => {
     const fetchSheets = async () => {
@@ -53,18 +58,63 @@ const App = () => {
     fetchEquips();
   }, []);
 
+  const handleAddSheet = async (sheetFormData) => {
+    const newSheet = await sheetService.create(sheetFormData);
+    setSheets([...sheets, newSheet]);
+    setSelected(newSheet);
+    navigate(`/sheets/${newSheet._id}`)
+  }
+
+  const handleAddEquip = async (equipFormData) => {
+    const newEquip = await equipService.create(equipFormData);
+    setEquips([newEquip, ...equips]);
+    setSelectedEquip(newEquip);
+    navigate(`/equips${newEquip._id}`);
+  }
+
+  const toggleModal = (equip) => {
+    setModalActive(!modalActive);
+    setSelectedEquip(equip);
+  }
+
+  const handleUpdateSheet = async (sheetFormData, sheetId) => {
+    const updatedSheet = await sheetService.update(sheetFormData, sheetId)
+    const newSheets = sheets.map((sheet) =>  sheetId === sheet._id ? updatedSheet : sheet);
+    setSheets(newSheets);
+    setSelected(updatedSheet);
+    navigate(`/sheets/${sheetId}`)
+  }
+
+  const handleDeleteSheet = async (sheetId) => {
+    const deletedSheet = await sheetService.deleteSheet(sheetId);
+    setSheets(sheets.filter((sheet) => sheet._id !== deletedSheet._id));
+    setSelected(null);
+    navigate('/sheets');
+  }
+
+  const handleDeleteEquip = async (equipId) => {
+    const deletedEquip = await equipService.deleteEquip(equipId);
+    setEquips(equips.filter((equip) => equip._id !== deletedEquip._id));
+    navigate('/equips');
+  };
+
   return (
     <>
       <NavBar />
       <Routes>
         <Route path='/' element={user ? <Navigate to={"/sheets"} /> : <Landing />} />
         <Route path='/sheets' element={!user ? <Navigate to={"/"} /> : <SheetList sheets={sheets} handleSelect={(sheet) => setSelected(sheet)} />} />
-        <Route path='/sheets/*' element={<SheetDetails sheet={selected} />} />
+        <Route path='/sheets/new' element={<SheetForm sheet={selected} handleAddSheet={handleAddSheet} handleUpdateSheet={handleUpdateSheet} />} />
+        <Route path='/sheets/:sheetId' element={<SheetDetails sheet={selected} handleSelect={toggleModal} handleDeleteSheet={handleDeleteSheet} />} />
+        <Route path='/sheets/:sheetId/edit' element={<SheetForm sheet={selected} handleAddSheet={handleAddSheet} handleUpdateSheet={handleUpdateSheet} />} />
         <Route path='/equips' element={<EquipList equips={equips} handleSelect={(equip) => setSelectedEquip(equip)} />} />
-        <Route path='/equips/:equipId' element={<EquipDetails equip={selectedEquip} />} />
+        <Route path='/equips/new' element={<EquipForm handleAddEquip={handleAddEquip} />} />
+        <Route path='/equips/:equipId' element={<EquipDetails equip={selectedEquip} handleDeleteEquip={handleDeleteEquip} />} />
         <Route path='/sign-up' element={<SignUpForm />} />
         <Route path='/sign-in' element={<SignInForm />} />
       </Routes>
+      {modalActive && <h1> modal active </h1>}
+      {modalActive && <EquipModal equip={selectedEquip} handleModal={toggleModal} />}
     </>
   );
 };

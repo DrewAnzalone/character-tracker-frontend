@@ -1,8 +1,6 @@
-// import { Link, Navigate, useParams } from "react-router";
 import { Link, Navigate } from "react-router";
 
 const SheetDetails = (props) => {
-  // const { sheet } = useParams();
   if (!props.sheet) {
     return <Navigate to={"/"} />;
   }
@@ -35,14 +33,16 @@ const SheetDetails = (props) => {
       </div>
       <div>
         {equips.map(equip =>
-          <Link
+          <div
             key={equip._id}
-            to={`/sheets/${props.sheet._id}/${equip._id}`}
+            onClick={() => props.handleSelect(equip)}
           >
             <p>{equip.name}</p>
-          </Link>
+          </div>
         )}
       </div>
+      <Link to={`/sheets/${props.sheet._id}/edit`}>Edit Sheet</Link>
+      <button onClick={() => props.handleDeleteSheet(props.sheet._id)}>Delete</button>
     </>
   );
 }
