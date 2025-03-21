@@ -69,13 +69,31 @@ const App = () => {
     const newEquip = await equipService.create(equipFormData);
     setEquips([newEquip, ...equips]);
     setSelectedEquip(newEquip);
-    navigate(`/equips/${newEquip._id}`);
+    navigate(`/equips${newEquip._id}`);
   }
 
   const toggleModal = (equip) => {
     setModalActive(!modalActive);
     setSelectedEquip(equip);
   }
+
+  const handleUpdateSheet = async (sheetId, sheetFormData) => {
+    const updatedSheet = await sheetService.update(sheetId, sheetFormData)
+    setSheets(sheets.map((sheet) => (sheetId === sheet._id ? updatedSheet : sheet)))
+    navigate(`/sheets/${sheetId}`)
+  }
+
+  const handleDeleteSheet = async (sheetId) => {
+    const deletedSheet = await sheetService.deleteSheet(sheetId)
+    setSheets(sheets.filter((sheet) => sheet._id !== deletedSheet._id))
+    navigate('/sheets')
+  }
+
+  const handleDeleteEquip = async (equipId) => {
+    const deletedEquip = await equipService.deleteEquip(equipId);
+    setEquips(equips.filter((equip) => equip._id !== deletedEquip._id));
+    navigate('/equips');
+};
 
   return (
     <>
@@ -85,9 +103,11 @@ const App = () => {
         <Route path='/sheets' element={!user ? <Navigate to={"/"} /> : <SheetList sheets={sheets} handleSelect={(sheet) => setSelected(sheet)} />} />
         <Route path='/sheets/:sheetId' element={<SheetDetails sheet={selected} handleSelect={toggleModal} />} />
         <Route path='/sheets/new' element={<SheetForm handleAddSheet={handleAddSheet} />} />
+        <Route path='/sheets/:sheetId/edit' element={<SheetForm handleUpdateSheet={handleUpdateSheet}/>}/>
         <Route path='/equips' element={<EquipList equips={equips} handleSelect={(equip) => setSelectedEquip(equip)} />} />
         <Route path='/equips/:equipId' element={<EquipDetails equip={selectedEquip} />} />
-        <Route path='/equips/new' element={<EquipForm handleAddEquip={handleAddEquip} />} />
+        <Route path='/equips/:equipId' element={<EquipDetails handleDeleteEquip={handleDeleteEquip} />} />
+        <Route path='/equips/new' element={<EquipForm handleAddEquip={handleAddEquip}/>} />
         <Route path='/sign-up' element={<SignUpForm />} />
         <Route path='/sign-in' element={<SignInForm />} />
       </Routes>

@@ -43,6 +43,8 @@ const SheetDetails = (props) => {
           </div>
         )}
       </div>
+      <Link to={`/sheets/${props.sheet._id}/edit`}>Edit Sheet</Link>
+      <button onClick={() => props.handleDeleteSheet(props.sheet._id)}>Delete</button>
     </>
   );
 }

@@ -1,15 +1,37 @@
-import {useState} from 'react'
+import {useState, useEffect} from 'react'
+import {useParams} from 'react-router'
+
+import * as sheetService from '../../services/sheetService'
 
 const SheetForm = (props) => {
+  const {sheetId} = useParams()
   const [formData, setFormData] = useState({
     name: '',
-    level: '',
+    level: 0,
     class: '',
-    baseHP: '',
-    baseAtk: '',
-    baseDef: '',
-    baseMagic: '',
+    baseHP: 0,
+    baseAtk: 0,
+    baseDef: 0,
+    baseMagic: 0,
   })
+
+  useEffect(() => {
+    const fetchSheet = async () => {
+      const sheetData = await sheetService.show(sheetId)
+      setFormData(sheetData)
+    }
+    if (sheetId) fetchSheet()
+
+    return () => setFormData({
+      name: '', 
+      level: 0, 
+      class: '', 
+      baseHP: 0, 
+      baseAtk: 0,
+      baseDef: 0,
+      baseMagic: 0
+    })
+  }, [sheetId])
 
   const handleChange = (evt) => {
     setFormData({...formData, [evt.target.name]: evt.target.value})
@@ -17,11 +39,16 @@ const SheetForm = (props) => {
 
   const handleSubmit = (evt) => {
     evt.preventDefault()
+    if (sheetId) {
+      props.handleUpdateSheet(sheetId, formData)
+    } else {
     props.handleAddSheet(formData)
+    }
   }
 
   return (
     <main>
+      <h1>{sheetId ? 'Edit Sheet' : 'New Sheet'}</h1>
       <form onSubmit={handleSubmit}>
         <label htmlFor='name-input'>Name</label>
           <input
@@ -35,7 +62,7 @@ const SheetForm = (props) => {
           <label htmlFor='level-input'>Level</label>
           <input
             required
-            type='text'
+            type='number'
             name='level'
             id='level-input'
             value={formData.level}
@@ -86,7 +113,7 @@ const SheetForm = (props) => {
             value={formData.baseMagic}
             onChange={handleChange}
           />
-          <button type='submit'>Add Sheet</button>
+          <button type='submit'>{sheetId ? 'Update Sheet' : 'Add Sheet'}</button>
       </form>
     </main>
   )
