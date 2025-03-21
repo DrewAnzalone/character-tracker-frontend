@@ -93,7 +93,7 @@ const App = () => {
     const deletedEquip = await equipService.deleteEquip(equipId);
     setEquips(equips.filter((equip) => equip._id !== deletedEquip._id));
     navigate('/equips');
-};
+  };
 
   return (
     <>
@@ -101,13 +101,12 @@ const App = () => {
       <Routes>
         <Route path='/' element={user ? <Navigate to={"/sheets"} /> : <Landing />} />
         <Route path='/sheets' element={!user ? <Navigate to={"/"} /> : <SheetList sheets={sheets} handleSelect={(sheet) => setSelected(sheet)} />} />
-        <Route path='/sheets/:sheetId' element={<SheetDetails sheet={selected} handleSelect={toggleModal} />} />
         <Route path='/sheets/new' element={<SheetForm handleAddSheet={handleAddSheet} />} />
-        <Route path='/sheets/:sheetId/edit' element={<SheetForm handleUpdateSheet={handleUpdateSheet}/>}/>
+        <Route path='/sheets/:sheetId' element={<SheetDetails sheet={selected} handleSelect={toggleModal} handleDelete={handleDeleteSheet} />} />
+        <Route path='/sheets/:sheetId/edit' element={<SheetForm handleUpdateSheet={handleUpdateSheet} />} />
         <Route path='/equips' element={<EquipList equips={equips} handleSelect={(equip) => setSelectedEquip(equip)} />} />
-        <Route path='/equips/:equipId' element={<EquipDetails equip={selectedEquip} />} />
-        <Route path='/equips/:equipId' element={<EquipDetails handleDeleteEquip={handleDeleteEquip} />} />
-        <Route path='/equips/new' element={<EquipForm handleAddEquip={handleAddEquip}/>} />
+        <Route path='/equips/new' element={<EquipForm handleAddEquip={handleAddEquip} />} />
+        <Route path='/equips/:equipId' element={<EquipDetails equip={selectedEquip} handleDeleteEquip={handleDeleteEquip} />} />
         <Route path='/sign-up' element={<SignUpForm />} />
         <Route path='/sign-in' element={<SignInForm />} />
       </Routes>

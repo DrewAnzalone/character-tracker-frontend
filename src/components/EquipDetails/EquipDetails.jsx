@@ -17,9 +17,9 @@ const EquipDetail = (props) => {
         {`${props.equip.type} with +${props.equip.statValue} ${props.equip.statModify}`}
       </p>
 
-    {equip.author._id === user._id && (
+    {props.equip.author._id === user._id && (
       <>
-        <button onClick={() => props.handleDeleteEquip(equipId)}>
+        <button onClick={() => props.handleDeleteEquip(props.equip._id)}>
             Delete
         </button>
       </>

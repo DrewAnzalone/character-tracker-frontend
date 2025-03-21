@@ -15,7 +15,6 @@ const EquipForm = (props) => {
 const handleSubmit = (evt) => {
     evt.preventDefault();
     props.handleAddEquip(formData);
-    props.handleAddEquip(formData);
   };
 
 
