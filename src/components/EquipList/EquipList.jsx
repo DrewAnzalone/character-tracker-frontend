@@ -5,12 +5,21 @@ const EquipList = (props) => {
     <>
       {props.equips.map(equip =>
         <Link onClick={() => props.handleSelect(equip)} key={equip._id} to={`/equips/${equip._id}`}>
-          {/* <tr> */}
-          <h2>{equip.name}</h2>
-          <p>
-            {`${equip.type} with +${equip.statValue} ${equip.statModify}`}
-          </p>
-          {/* </tr> */}
+          <table>
+            <tbody>
+            <tr>
+              <th>Equip Name</th>
+              <th>Equip Type</th>
+              <th>Equip Stats</th>            
+            </tr>
+            <tr>
+                <td>{equip.name}</td>
+                <td>{equip.type}</td>
+                <td>{`+${equip.statValue} ${equip.statModify}`}</td>
+            </tr>
+          </tbody>
+          </table>
+
         </Link>
       )}
     </>
