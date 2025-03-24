@@ -104,9 +104,9 @@ const App = () => {
       <Routes>
         <Route path='/' element={user ? <Navigate to={"/sheets"} /> : <Landing />} />
         <Route path='/sheets' element={!user ? <Navigate to={"/"} /> : <SheetList sheets={sheets} handleSelect={(sheet) => setSelected(sheet)} />} />
-        <Route path='/sheets/new' element={<SheetForm sheet={selected} handleAddSheet={handleAddSheet} handleUpdateSheet={handleUpdateSheet} />} />
+        <Route path='/sheets/new' element={<SheetForm sheet={selected} handleAddSheet={handleAddSheet} handleUpdateSheet={handleUpdateSheet} equips={equips}/>} />
         <Route path='/sheets/:sheetId' element={<SheetDetails sheet={selected} handleSelect={toggleModal} handleDeleteSheet={handleDeleteSheet} />} />
-        <Route path='/sheets/:sheetId/edit' element={<SheetForm sheet={selected} handleAddSheet={handleAddSheet} handleUpdateSheet={handleUpdateSheet} />} />
+        <Route path='/sheets/:sheetId/edit' element={<SheetForm sheet={selected} handleAddSheet={handleAddSheet} handleUpdateSheet={handleUpdateSheet} equips={equips}/>} />
         <Route path='/equips' element={<EquipList equips={equips} handleSelect={(equip) => setSelectedEquip(equip)} />} />
         <Route path='/equips/new' element={<EquipForm handleAddEquip={handleAddEquip} />} />
         <Route path='/equips/:equipId' element={<EquipDetails equip={selectedEquip} handleDeleteEquip={handleDeleteEquip} />} />
