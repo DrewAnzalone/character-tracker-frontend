@@ -1,34 +1,39 @@
-import { Link, Navigate } from "react-router";
+import { Link, Navigate, useNavigate } from "react-router";
+import * as images from '../../assets';
 
 const SheetDetails = (props) => {
+  const navigate = useNavigate();
+
   if (!props.sheet) {
     return <Navigate to={"/"} />;
   }
+
+  const stats = { baseHP: props.sheet.baseHP, baseAtk: props.sheet.baseAtk, baseDef: props.sheet.baseDef, baseMagic: props.sheet.baseMagic }
+  props.sheet.equips.forEach(equip => {
+    stats[equip.statModify] += equip.statValue;
+  });
 
   const {
     name: name,
     level: level,
     class: sheetClass,
-    baseHP: baseHP,
-    baseAtk: baseAtk,
-    baseDef: baseDef,
-    baseMagic: baseMagic,
     equips: equips
   } = props.sheet;
 
   return (
     <>
+      <button onClick={() => navigate(-1)}>Back</button>
       <div>
-        <img src="https://kbhgames.com/wp-content/uploads/2021/12/fnf-animation-vs-animator-the-chosen-one.jpg" alt="the chosen one" />
+        <img src={images.Character} alt="the chosen one" />
       </div>
       <div>
         <h1>{name}</h1>
         <h2>Level {level} {sheetClass}</h2>
         <ul>
-          <li>HP: {baseHP}</li>
-          <li>Atk: {baseAtk}</li>
-          <li>Def: {baseDef}</li>
-          <li>Magic: {baseMagic}</li>
+          <li>HP: {stats.baseHP}</li>
+          <li>Atk: {stats.baseAtk}</li>
+          <li>Def: {stats.baseDef}</li>
+          <li>Magic: {stats.baseMagic}</li>
         </ul>
       </div>
       <div>

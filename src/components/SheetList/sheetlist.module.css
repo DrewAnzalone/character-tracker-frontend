@@ -1,5 +1,11 @@
+.sheetgrid {
+    display: grid;
+    gap: 10px;
+    grid-template-columns: repeat(auto-fit, 200px);
+}
+
 .div {
-    background-color: white;
+    background-color: #313338;
     border-radius: 10px;
     padding: 10px;
     margin: 12px 0;
