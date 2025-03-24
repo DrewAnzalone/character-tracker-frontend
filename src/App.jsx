@@ -74,7 +74,7 @@ const App = () => {
   }
 
   const handleUpdateSheet = async (sheetFormData, sheetId) => {
-    const updatedSheet = await sheetService.update(sheetFormData, sheetId)
+    const updatedSheet = await sheetService.update(sheetFormData, sheetId);
     const newSheets = sheets.map(sheet => sheetId === sheet._id ? updatedSheet : sheet);
     setSheets(newSheets);
     setSelected(updatedSheet);

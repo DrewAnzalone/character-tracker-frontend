@@ -18,11 +18,7 @@ const SheetForm = (props) => {
 
   useEffect(() => {
     const setEditSheet = async () => {
-      const currEquips = props.equips.map(e => {
-        if (sheet.equips.find(eq => eq._id.toString() === e._id.toString())) {
-          return { value: e._id, label: e.name };
-        }
-      });
+      const currEquips = sheet.equips.map(e => ({value: e._id, label: e.name}));
 
       const newFormData = {
         name: sheet.name,
@@ -56,7 +52,6 @@ const SheetForm = (props) => {
     formData.equips = formData.equips.map((e) => e.value);
     if (sheet) {
       props.handleUpdateSheet(formData, sheet._id);
-      // TODO update sheet
     } else {
       props.handleAddSheet(formData);
     }
