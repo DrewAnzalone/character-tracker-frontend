@@ -5,6 +5,8 @@ import { signIn } from '../../services/authService';
 
 import { UserContext } from '../../contexts/UserContext';
 
+import styles from '/src/components/SignInForm/signinform.module.css'
+
 const SignInForm = () => {
   const navigate = useNavigate();
   const { setUser } = useContext(UserContext);
@@ -31,13 +33,13 @@ const SignInForm = () => {
   };
 
   return (
-    <main>
-      <h1>Sign In</h1>
+    <main className={styles.signin}>
+      <h1 className={styles.h1}>Sign In</h1>
       <p>{message}</p>
-      <form autoComplete='off' onSubmit={handleSubmit}>
+      <form autoComplete='off' onSubmit={handleSubmit} className={styles.form}>
         <div>
           <label htmlFor='email'>Username:</label>
-          <input
+          <input className={styles.input}
             type='text'
             autoComplete='off'
             id='username'
@@ -49,7 +51,7 @@ const SignInForm = () => {
         </div>
         <div>
           <label htmlFor='password'>Password:</label>
-          <input
+          <input className={styles.input}
             type='password'
             autoComplete='off'
             id='password'
@@ -60,8 +62,8 @@ const SignInForm = () => {
           />
         </div>
         <div>
-          <button>Sign In</button>
-          <button onClick={() => navigate('/')}>Cancel</button>
+          <button className={styles.button}>Sign In</button>
+          <button className={styles.button} onClick={() => navigate('/')}>Cancel</button>
         </div>
       </form>
     </main>
