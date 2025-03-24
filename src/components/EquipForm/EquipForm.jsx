@@ -25,7 +25,7 @@ const handleSubmit = (evt) => {
     <main>
       <form onSubmit={handleSubmit} className={styles.form}>
         <label htmlFor='name-input'>Name</label>
-        <input
+        <input className={styles.input}
           required
           type='text'
           name='name'
@@ -34,7 +34,7 @@ const handleSubmit = (evt) => {
           onChange={handleChange}
         />
         <label htmlFor='type-input'>Type</label>
-        <select
+        <select className={styles.select}
           required
           name='type'
           id='type-input'
@@ -58,7 +58,7 @@ const handleSubmit = (evt) => {
           <option value='XBow'>XBow</option>
         </select>
         <label htmlFor='category-statModify'>Stat Modifier</label>
-        <select
+        <select className={styles.select}
           required
           name='statModify'
           id='statModify-input'
@@ -71,14 +71,14 @@ const handleSubmit = (evt) => {
           <option value='baseMagic'>baseMagic</option>
         </select>
         <label htmlFor='statValue-input'>Stat Value</label>
-        <input
+        <input className={styles.input}
           type='number'
           name='statValue'
           id='name-input'
           value={formData.statValue}
           onChange={handleChange}
         />
-        <button type='submit'>Add Equip</button>
+        <button type='submit' className={styles.button}>Add Equip</button>
       </form>
     </main>
   );
