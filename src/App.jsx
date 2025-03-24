@@ -1,13 +1,14 @@
 import { useContext, useEffect, useState } from 'react';
-import { Navigate, Routes, Route, Link, useNavigate } from 'react-router';
+import { Navigate, Routes, Route, useNavigate } from 'react-router';
+// import { Link } from 'react-router';
 
 import NavBar from './components/NavBar/NavBar.jsx';
 import SignUpForm from './components/SignUpForm/SignUpForm.jsx';
 import SignInForm from './components/SignInForm/SignInForm.jsx';
 import Landing from './components/Landing/Landing.jsx';
-import Dashboard from './components/Dashboard/Dashboard.jsx';
+// import Dashboard from './components/Dashboard/Dashboard.jsx';
 import EquipList from './components/EquipList/EquipList.jsx';
-import EquipDetails from './components/EquipDetails/EquipDetails.jsx';
+// import EquipDetails from './components/EquipDetails/EquipDetails.jsx';
 import EquipForm from './components/EquipForm/EquipForm.jsx';
 import SheetDetails from './components/SheetDetails/SheetDetails.jsx';
 import SheetList from './components/SheetList/SheetList.jsx';
@@ -72,14 +73,9 @@ const App = () => {
     navigate(`/equips${newEquip._id}`);
   }
 
-  const toggleModal = (equip) => {
-    setModalActive(!modalActive);
-    setSelectedEquip(equip);
-  }
-
   const handleUpdateSheet = async (sheetFormData, sheetId) => {
     const updatedSheet = await sheetService.update(sheetFormData, sheetId)
-    const newSheets = sheets.map((sheet) =>  sheetId === sheet._id ? updatedSheet : sheet);
+    const newSheets = sheets.map(sheet => sheetId === sheet._id ? updatedSheet : sheet);
     setSheets(newSheets);
     setSelected(updatedSheet);
     navigate(`/sheets/${sheetId}`)
@@ -87,29 +83,34 @@ const App = () => {
 
   const handleDeleteSheet = async (sheetId) => {
     const deletedSheet = await sheetService.deleteSheet(sheetId);
-    setSheets(sheets.filter((sheet) => sheet._id !== deletedSheet._id));
+    setSheets(sheets.filter(sheet => sheet._id !== deletedSheet._id));
     setSelected(null);
     navigate('/sheets');
   }
 
   const handleDeleteEquip = async (equipId) => {
     const deletedEquip = await equipService.deleteEquip(equipId);
-    setEquips(equips.filter((equip) => equip._id !== deletedEquip._id));
+    setEquips(equips.filter(equip => equip._id !== deletedEquip._id));
+    setModalActive(false);
     navigate('/equips');
   };
+
+  const toggleModal = (equip) => {
+    setModalActive(!modalActive);
+    setSelectedEquip(equip);
+  }
 
   return (
     <>
       <NavBar />
       <Routes>
         <Route path='/' element={user ? <Navigate to={"/sheets"} /> : <Landing />} />
-        <Route path='/sheets' element={!user ? <Navigate to={"/"} /> : <SheetList sheets={sheets} handleSelect={(sheet) => setSelected(sheet)} />} />
-        <Route path='/sheets/new' element={<SheetForm sheet={selected} handleAddSheet={handleAddSheet} handleUpdateSheet={handleUpdateSheet} equips={equips}/>} />
+        <Route path='/sheets' element={!user ? <Navigate to={"/"} /> : <SheetList sheets={sheets} handleSelect={sheet => setSelected(sheet)} />} />
+        <Route path='/sheets/new' element={<SheetForm sheet={selected} handleAddSheet={handleAddSheet} handleUpdateSheet={handleUpdateSheet} equips={equips} />} />
         <Route path='/sheets/:sheetId' element={<SheetDetails sheet={selected} handleSelect={toggleModal} handleDeleteSheet={handleDeleteSheet} />} />
-        <Route path='/sheets/:sheetId/edit' element={<SheetForm sheet={selected} handleAddSheet={handleAddSheet} handleUpdateSheet={handleUpdateSheet} equips={equips}/>} />
-        <Route path='/equips' element={<EquipList equips={equips} handleSelect={(equip) => setSelectedEquip(equip)} />} />
+        <Route path='/sheets/:sheetId/edit' element={<SheetForm sheet={selected} handleAddSheet={handleAddSheet} handleUpdateSheet={handleUpdateSheet} equips={equips} />} />
+        <Route path='/equips' element={<EquipList equips={equips} handleSelect={toggleModal} handleDeleteEquip={handleDeleteEquip} />} />
         <Route path='/equips/new' element={<EquipForm handleAddEquip={handleAddEquip} />} />
-        <Route path='/equips/:equipId' element={<EquipDetails equip={selectedEquip} handleDeleteEquip={handleDeleteEquip} />} />
         <Route path='/sign-up' element={<SignUpForm />} />
         <Route path='/sign-in' element={<SignInForm />} />
       </Routes>
