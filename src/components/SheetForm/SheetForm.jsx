@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import Select from 'react-select'
 
 
 const blankSheet = {
@@ -9,14 +10,17 @@ const blankSheet = {
   baseAtk: 0,
   baseDef: 0,
   baseMagic: 0,
-}
+  equips: [],
+};
 
 const SheetForm = (props) => {
   const sheet = props.sheet;
-  const [formData, setFormData] = useState(blankSheet)
+  const [formData, setFormData] = useState(blankSheet);
 
   useEffect(() => {
     const setEditSheet = async () => {
+      const currEquips = sheet.equips.map(e => ({value: e._id, label: e.name}));
+
       const newFormData = {
         name: sheet.name,
         level: sheet.level,
@@ -25,7 +29,8 @@ const SheetForm = (props) => {
         baseAtk: sheet.baseAtk,
         baseDef: sheet.baseDef,
         baseMagic: sheet.baseMagic,
-      }
+        equips: currEquips,
+      };
       setFormData(newFormData);
     }
     if (sheet) {
@@ -33,20 +38,29 @@ const SheetForm = (props) => {
     } else {
       return () => setFormData(blankSheet);
     }
-  }, [sheet])
+  }, [sheet, props.equips]);
 
   const handleChange = (evt) => {
-    setFormData({ ...formData, [evt.target.name]: evt.target.value })
+    setFormData({ ...formData, [evt.target.name]: evt.target.value });
+  }
+
+  const handleMultiSelect = (selected) => {
+    setFormData({ ...formData, equips: selected });
   }
 
   const handleSubmit = (evt) => {
-    evt.preventDefault()
+    evt.preventDefault();
+    formData.equips = formData.equips.map((e) => e.value);
     if (sheet) {
       props.handleUpdateSheet(formData, sheet._id);
     } else {
       props.handleAddSheet(formData);
     }
   }
+
+  const equipOptions = props.equips.map((equip) => (
+    { value: equip._id, label: equip.name }
+  ));
 
   return (
     <main>
@@ -115,6 +129,17 @@ const SheetForm = (props) => {
           value={formData.baseMagic}
           onChange={handleChange}
         />
+        <label htmlFor='equips-input'>Equipment
+          <Select
+            closeMenuOnSelect={false}
+            isClearable={true}
+            isSearchable={true}
+            isMulti={true}
+            options={equipOptions}
+            onChange={handleMultiSelect}
+            value={formData.equips}
+          />
+        </label>
         <button type='submit'>{sheet ? 'Update Sheet' : 'Add Sheet'}</button>
       </form>
     </main>
