@@ -1,0 +1,12 @@
+.ul {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+.li {
+    list-style: none;
+    margin: 8px;
+    padding: 8px;
+    border: whitesmoke 3px solid;
+    border-radius: 8px;
+  }
