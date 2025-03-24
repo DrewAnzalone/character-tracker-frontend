@@ -1,27 +1,27 @@
-// import { Link } from 'react-router';
+import { Link } from 'react-router';
 
 const EquipList = (props) => {
   return (
     <>
-      {props.equips.map(equip =>
-        <div key={equip._id} onClick={() => props.handleSelect(equip)}>
-          <table>
-            <tbody>
-            <tr>
-              <th>Equip Name</th>
-              <th>Equip Type</th>
-              <th>Equip Stats</th>            
-            </tr>
-            <tr>
-                <td>{equip.name}</td>
+    <li><Link to='/equips/new'>New Equip</Link></li>
+      <table>
+        <tbody>
+          <tr>
+            <th>Equip Name</th>
+            <th>Equip Type</th>
+            <th>Equip Stats</th>
+            
+          </tr>
+          {props.equips.map(equip =>
+              <tr key={equip._id}>
+                <td onClick={() => props.handleSelect(equip)}>{equip.name}</td>
                 <td>{equip.type}</td>
                 <td>{`+${equip.statValue} ${equip.statModify}`}</td>
-            </tr>
-          </tbody>
-          </table>
-
-        </div>
-      )}
+                <td><button onClick={() => props.handleDeleteEquip(equip._id)}>Delete</button></td>
+              </tr>
+          )}
+        </tbody>
+      </table>
     </>
   );
 }

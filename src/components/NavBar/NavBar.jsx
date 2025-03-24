@@ -19,7 +19,6 @@ const NavBar = () => {
           <li><Link to='/sheets'>Dashboard</Link></li>
           <li><Link to='/' onClick={handleSignOut}>Sign Out</Link></li>
           <li><Link to='/equips'>Equips</Link></li>
-          <li><Link to='/equips/new'>New Equip</Link></li>
         </ul>
         :
         <ul>

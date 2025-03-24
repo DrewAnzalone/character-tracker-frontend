@@ -70,7 +70,7 @@ const App = () => {
     const newEquip = await equipService.create(equipFormData);
     setEquips([newEquip, ...equips]);
     setSelectedEquip(newEquip);
-    navigate(`/equips${newEquip._id}`);
+    navigate(`/equips`);
   }
 
   const toggleModal = (equip) => {
