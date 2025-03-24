@@ -1,4 +1,4 @@
-import { useState, useEffect, React } from 'react'
+import { useState, useEffect } from 'react'
 import Select from 'react-select'
 
 const blankSheet = {
@@ -10,14 +10,20 @@ const blankSheet = {
   baseDef: 0,
   baseMagic: 0,
   equips: [],
-}
+};
 
 const SheetForm = (props) => {
   const sheet = props.sheet;
-  const [formData, setFormData] = useState(blankSheet)
+  const [formData, setFormData] = useState(blankSheet);
 
   useEffect(() => {
     const setEditSheet = async () => {
+      const currEquips = props.equips.map(e => {
+        if (sheet.equips.find(eq => eq._id.toString() === e._id.toString())) {
+          return { value: e._id, label: e.name };
+        }
+      });
+
       const newFormData = {
         name: sheet.name,
         level: sheet.level,
@@ -26,10 +32,8 @@ const SheetForm = (props) => {
         baseAtk: sheet.baseAtk,
         baseDef: sheet.baseDef,
         baseMagic: sheet.baseMagic,
-        equips: props.equips.filter(e => sheet.equips.includes(e._id.toString())),
-      } 
-      console.log(newFormData)
-      console.log(sheet.equips)
+        equips: currEquips,
+      };
       setFormData(newFormData);
     }
     if (sheet) {
@@ -37,32 +41,30 @@ const SheetForm = (props) => {
     } else {
       return () => setFormData(blankSheet);
     }
-  }, [sheet])
+  }, [sheet, props.equips]);
 
   const handleChange = (evt) => {
-    console.log(evt instanceof Array)
-    if (evt instanceof Array) {
-      setFormData({ ...formData, equips: evt })
-    } else {
-      setFormData({ ...formData, [evt.target.name]: evt.target.value })
-    }
-    console.log('formData:', (() => formData)())
+    setFormData({ ...formData, [evt.target.name]: evt.target.value });
+  }
+
+  const handleMultiSelect = (selected) => {
+    setFormData({ ...formData, equips: selected });
   }
 
   const handleSubmit = (evt) => {
-    evt.preventDefault()
-    formData.equips= formData.equips.map((e) => e.value)
-    console.log(formData.equips)
+    evt.preventDefault();
+    formData.equips = formData.equips.map((e) => e.value);
     if (sheet) {
       props.handleUpdateSheet(formData, sheet._id);
+      // TODO update sheet
     } else {
       props.handleAddSheet(formData);
     }
   }
 
   const equipOptions = props.equips.map((equip) => (
-    {value: equip._id, label: equip.name}
-  ))
+    { value: equip._id, label: equip.name }
+  ));
 
   return (
     <main>
@@ -138,7 +140,7 @@ const SheetForm = (props) => {
             isSearchable={true}
             isMulti={true}
             options={equipOptions}
-            onChange={handleChange}
+            onChange={handleMultiSelect}
             value={formData.equips}
           />
         </label>
