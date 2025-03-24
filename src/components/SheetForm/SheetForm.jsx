@@ -65,9 +65,9 @@ const SheetForm = (props) => {
   return (
     <main>
       <h1>{sheet ? 'Edit Sheet' : 'New Sheet'}</h1>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className={styles.form}>
         <label htmlFor='name-input'>Name</label>
-        <input
+        <input className={styles.input}
           required
           type='text'
           name='name'
@@ -76,7 +76,7 @@ const SheetForm = (props) => {
           onChange={handleChange}
         />
         <label htmlFor='level-input'>Level</label>
-        <input
+        <input className={styles.input}
           required
           type='number'
           name='level'
@@ -85,7 +85,7 @@ const SheetForm = (props) => {
           onChange={handleChange}
         />
         <label htmlFor='class-input'>Class</label>
-        <input
+        <input className={styles.input}
           required
           type='text'
           name='class'
@@ -94,7 +94,7 @@ const SheetForm = (props) => {
           onChange={handleChange}
         />
         <label htmlFor='baseHP-input'>baseHP</label>
-        <input
+        <input className={styles.input}
           required
           type='number'
           name='baseHP'
@@ -103,7 +103,7 @@ const SheetForm = (props) => {
           onChange={handleChange}
         />
         <label htmlFor='baseAtk-input'>baseAtk</label>
-        <input
+        <input className={styles.input}
           required
           type='number'
           name='baseAtk'
@@ -112,7 +112,7 @@ const SheetForm = (props) => {
           onChange={handleChange}
         />
         <label htmlFor='baseDef-input'>baseDef</label>
-        <input
+        <input className={styles.input}
           required
           type='number'
           name='baseDef'
@@ -121,7 +121,7 @@ const SheetForm = (props) => {
           onChange={handleChange}
         />
         <label htmlFor='baseMagic-input'>baseMagic</label>
-        <input
+        <input className={styles.input}
           required
           type='number'
           name='baseMagic'
@@ -129,7 +129,7 @@ const SheetForm = (props) => {
           value={formData.baseMagic}
           onChange={handleChange}
         />
-        <label htmlFor='equips-input'>Equipment
+        <label htmlFor='equips-input' className={styles.equip}>Equipment
           <Select
             closeMenuOnSelect={false}
             isClearable={true}
@@ -140,7 +140,7 @@ const SheetForm = (props) => {
             value={formData.equips}
           />
         </label>
-        <button type='submit'>{sheet ? 'Update Sheet' : 'Add Sheet'}</button>
+        <button type='submit' className={styles.button}>{sheet ? 'Update Sheet' : 'Add Sheet'}</button>
       </form>
     </main>
   )
