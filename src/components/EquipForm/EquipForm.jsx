@@ -1,4 +1,7 @@
 import { useState } from 'react';
+import styles from '/src/components/EquipForm/equipform.module.css'
+
+
 
 const EquipForm = (props) => {
   const [formData, setFormData] = useState({
@@ -20,7 +23,7 @@ const handleSubmit = (evt) => {
 
   return (
     <main>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className={styles.form}>
         <label htmlFor='name-input'>Name</label>
         <input
           required
@@ -75,7 +78,7 @@ const handleSubmit = (evt) => {
           value={formData.statValue}
           onChange={handleChange}
         />
-        <button type='submit'>SUBMIT</button>
+        <button type='submit'>Add Equip</button>
       </form>
     </main>
   );
