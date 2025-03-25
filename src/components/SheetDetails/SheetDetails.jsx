@@ -24,7 +24,7 @@ const SheetDetails = (props) => {
     <>
       <button onClick={() => navigate(-1)}>Back</button>
       <div>
-        <img src={images.Character} alt="the chosen one" />
+        <img src={images.Character} alt="Character placeholder" />
       </div>
       <div>
         <h1>{name}</h1>
