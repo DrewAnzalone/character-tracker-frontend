@@ -16,26 +16,25 @@ My planning materials [can be found here](https://github.com/michaelmcbride113/S
 -  [MDN](https://developer.mozilla.org/en-US/) - I used MDN when I was unable to come up with/find code that's applicable in my lecture notes or lab work. For example, I could not figure out how to update my hangman images with an incorrect guess so I used the [innerHTML element](https://developer.mozilla.org/en-US/docs/Web/API/Element/innerHTML) which I found on MDN.
 
 ## Technologies Used: 
-1. **HTML**
-    * HTML was used to write all the text on the website
-    * HTML was incredibly helpful when creating the site as it is the backbone of my whole project
+1. **JSX**
+    * JSX was used to provide visual tex and buttons/links within the website
+    * JSX is really what allows the user to explore our website.
 2. **CSS**
     * CSS was used for styling the site
-    * Before implementing the CSS, my game was working but it was incredibly ugly to look at and did not provide a good user experience
+    * By implementing CSS we were able to give our website a better feel and make it easier to navigate through the website.
 3. **Javascript**
-    * Javascript is where I spent the vast majority of my time working on the website
-    * Javascript houses all the background code that makes my site function the way it does and makes my game playable.
-4. **data.js**
-    * I used a data.js file to house the answers for my game. The data.js file allowed me to keep data seperate from my Javascript file and keep my workspace cleaner and more organized.
+    * Javascript was mostly used in the back-end of the website, but was also used for our front-end services.
+    * Javascript houses all the background code that allows a user to sign-in/sign-up and create their sheets and equips.
+4. **React**
+    * React was the basis of the entire website
+    * By using React we were able to make our website functionable by importing and exporting diffrent variables and functions.
 
 
-## Next steps
-There were quite a few things I wanted to include in my site but I was unable to due to time limitations and my current skill level 
+## Stretch Goals
+Theres a few things we would like to add to our website to make it more user-friendly
 
-1. **Add in locations and quotes as options for answers**
-* 
+1. **Expanding what a user can add to an item**
+    * Adding a way for a user to add abilities to an item and possibly even their character
 
-2. **Update images with images I make myself**
-* 
-3. **Update website to mirror website from the show**
-* 
+2. **Creating Parties**
+    * Allowing a user to make one or more parties that are made up of the character sheets that they have created
