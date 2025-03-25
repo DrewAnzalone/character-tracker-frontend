@@ -23,7 +23,7 @@ const SheetDetails = (props) => {
   } = props.sheet;
 
   return (
-    <>
+    <div className="margin">
       <button className={styles.button} onClick={() => navigate(-1)}>Back</button>
       <div>
         <h1>{name}</h1>
@@ -50,7 +50,7 @@ const SheetDetails = (props) => {
       </div>
       <button className={styles.button}><Link to={`/sheets/${props.sheet._id}/edit`}>Edit Sheet</Link></button>
       <button className={styles.button} onClick={() => props.handleDeleteSheet(props.sheet._id)}>Delete</button>
-    </>
+    </div>
   );
 }
 
