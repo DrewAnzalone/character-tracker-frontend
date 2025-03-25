@@ -24,7 +24,8 @@ const handleSubmit = (evt) => {
 
 
   return (
-    <div className='margin'>
+    <div className={`margin ${styles.container}`}>
+      <h1>New Equipment</h1>
       <form onSubmit={handleSubmit} className={styles.form}>
         <label htmlFor='name-input'>Name</label>
         <input className={styles.input}

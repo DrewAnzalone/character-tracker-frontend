@@ -63,7 +63,7 @@ const SheetForm = (props) => {
   ));
 
   return (
-    <main>
+    <div className={`margin ${styles.container}`}>
       <h1>{sheet ? 'Edit Sheet' : 'New Sheet'}</h1>
       <form onSubmit={handleSubmit} className={styles.form}>
         <label htmlFor='name-input'>Name</label>
@@ -142,7 +142,7 @@ const SheetForm = (props) => {
         </label>
         <button type='submit' className={styles.button}>{sheet ? 'Update Sheet' : 'Add Sheet'}</button>
       </form>
-    </main>
+    </div>
   )
 }
 
