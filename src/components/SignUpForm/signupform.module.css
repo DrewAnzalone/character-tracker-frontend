@@ -11,9 +11,9 @@
     color: #ffffff;
     font-size: 2rem;
     text-align: center;
-  }
-  
-  .form {
+}
+
+.form {
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
@@ -24,17 +24,17 @@
     border-radius: 20px;
     color: #4b598e;
     font-weight: bold;
-  }
-  
-  .input {
+}
+
+.input {
     border: 1px solid rgb(182, 182, 182);
     padding: 8px;
     border-radius: 10px;
     width: 80%;
     margin: 30px;
-  }
-  
-  .button {
+}
+
+.button {
     padding: 10px;
     background-color: #000000;
     color: white;
@@ -42,8 +42,8 @@
     border: none;
     margin: 10px 40px;
     font-size: 1.1rem;
-  }
+}
 
-  .button:hover {
+.button:hover {
     background-color: rgb(176, 133, 226);
 }

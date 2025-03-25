@@ -94,8 +94,8 @@
     border: none;
     margin: 15px 0;
     font-size: 1.1rem;
-  }
+}
 
-  .button:hover {
+.button:hover {
     background-color: rgb(176, 133, 226);
 }

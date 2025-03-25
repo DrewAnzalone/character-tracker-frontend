@@ -58,7 +58,7 @@ async function deleteEquip(id) {
       headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
       method: "DELETE",
     });
-    
+
     const output = await res.json();
     if (!res.ok) console.log(output);
     return output;

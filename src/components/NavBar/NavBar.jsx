@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 import { Link } from 'react-router';
-import styles from '/src/components/NavBar/navbar.module.css'
+import styles from '/src/components/NavBar/navbar.module.css';
 
 import { UserContext } from '../../contexts/UserContext';
 
