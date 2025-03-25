@@ -135,7 +135,6 @@ const SheetForm = (props) => {
           />
           <label htmlFor='equips-input' className={styles.equip}>Equipment
             <Select
-              closeMenuOnSelect={false}
               isClearable={true}
               isSearchable={true}
               isMulti={true}

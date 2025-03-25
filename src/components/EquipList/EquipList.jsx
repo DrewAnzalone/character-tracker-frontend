@@ -38,11 +38,11 @@ const EquipList = (props) => {
             <th>Delete?</th>
           </tr>
           {props.equips.map(equip =>
-              <tr key={equip._id} onClick={() => props.handleSelect(equip)}>
-                <td><img src={imageFiles[equip.type]} alt="Weapon glyph" /></td>
-                <td>{equip.name}</td>
-                <td>{equip.type}</td>
-                <td>{`+${equip.statValue} ${equip.statModify}`}</td>
+              <tr key={equip._id}>
+                <td onClick={() => props.handleSelect(equip)}><img src={imageFiles[equip.type]} alt="Weapon glyph" /></td>
+                <td onClick={() => props.handleSelect(equip)}>{equip.name}</td>
+                <td onClick={() => props.handleSelect(equip)}>{equip.type}</td>
+                <td onClick={() => props.handleSelect(equip)}>{`+${equip.statValue} ${equip.statModify}`}</td>
                 <td><button onClick={() => props.handleDeleteEquip(equip._id)}>Delete</button></td>
               </tr>
           )}

@@ -87,7 +87,7 @@ const EquipForm = (props) => {
             value={formData.statValue}
             onChange={handleChange}
           />
-          <button type='submit' className={`${user ? '' : 'disabled'} ${styles.button}`} disabled={!!user}>Add Equip</button>
+          <button type='submit' className={`${user ? '' : 'disabled'} ${styles.button}`} disabled={!user}>Add Equip</button>
         </form>
       </div>
     </div>
