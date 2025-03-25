@@ -52,11 +52,11 @@ const SheetForm = (props) => {
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
-    formData.equips = formData.equips.map((e) => e.value);
+    const objectData = {...formData, equips: formData.equips.map((e) => e.value)};
     if (sheet) {
-      props.handleUpdateSheet(formData, sheet._id);
+      props.handleUpdateSheet(objectData, sheet._id);
     } else {
-      props.handleAddSheet(formData);
+      props.handleAddSheet(objectData);
     }
   }
 
