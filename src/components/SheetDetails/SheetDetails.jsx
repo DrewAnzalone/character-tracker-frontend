@@ -10,7 +10,13 @@ const SheetDetails = (props) => {
     return <Navigate to={"/"} />;
   }
 
-  const stats = { baseHP: props.sheet.baseHP, baseAtk: props.sheet.baseAtk, baseDef: props.sheet.baseDef, baseMagic: props.sheet.baseMagic }
+  const stats = {
+    baseHP: props.sheet.baseHP,
+    baseAtk: props.sheet.baseAtk,
+    baseDef: props.sheet.baseDef,
+    baseMagic: props.sheet.baseMagic
+  };
+
   props.sheet.equips.forEach(equip => {
     stats[equip.statModify] += equip.statValue;
   });

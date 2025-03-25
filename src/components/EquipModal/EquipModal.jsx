@@ -1,4 +1,4 @@
-import './EquipModal.css'
+import './EquipModal.css';
 import * as images from '../../assets';
 
 const imageFiles = {

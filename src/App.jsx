@@ -22,7 +22,7 @@ const App = () => {
   const navigate = useNavigate();
   const [sheets, setSheets] = useState([]);
   const [selected, setSelected] = useState(null);
-  const [equips, setEquips] = useState([])
+  const [equips, setEquips] = useState([]);
   const [selectedEquip, setSelectedEquip] = useState(null);
   const [modalActive, setModalActive] = useState(false);
 
