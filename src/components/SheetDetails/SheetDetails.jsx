@@ -1,6 +1,8 @@
 import { Link, Navigate, useNavigate } from "react-router";
 import * as images from '../../assets';
 
+import styles from '/src/components/SheetDetails/sheetdetails.module.css'
+
 const SheetDetails = (props) => {
   const navigate = useNavigate();
 
@@ -22,12 +24,12 @@ const SheetDetails = (props) => {
 
   return (
     <>
-      <button onClick={() => navigate(-1)}>Back</button>
-      <div>
-        <img src={images.Character} alt="Character placeholder" />
-      </div>
+      <button className={styles.button} onClick={() => navigate(-1)}>Back</button>
       <div>
         <h1>{name}</h1>
+        <div>
+        <img src={images.Character} alt="Character placeholder" />
+      </div>
         <h2>Level {level} {sheetClass}</h2>
         <ul>
           <li>HP: {stats.baseHP}</li>
@@ -46,8 +48,8 @@ const SheetDetails = (props) => {
           </div>
         )}
       </div>
-      <Link to={`/sheets/${props.sheet._id}/edit`}>Edit Sheet</Link>
-      <button onClick={() => props.handleDeleteSheet(props.sheet._id)}>Delete</button>
+      <button className={styles.button}><Link to={`/sheets/${props.sheet._id}/edit`}>Edit Sheet</Link></button>
+      <button className={styles.button} onClick={() => props.handleDeleteSheet(props.sheet._id)}>Delete</button>
     </>
   );
 }
