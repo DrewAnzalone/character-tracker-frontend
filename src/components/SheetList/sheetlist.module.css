@@ -47,3 +47,17 @@
     color: #666;
     margin-top: 8px;
 }
+
+.button {
+    padding: 10px;
+    background-color: #000000;
+    color: white;
+    border-radius: 30px;
+    border: none;
+
+    font-size: 1.1rem;
+  }
+
+  .button:hover {
+    background-color: rgb(176, 133, 226);
+}
