@@ -1,7 +1,7 @@
 # Character Tracker
 Our group chose to make an app where users can create character sheets and add items (equips) to their sheet to dynamically update their stats. Our project allow users to create, read, update and delete these sheets while allowing users to create/add their own equips, or use equips already in our database.
 
-![Character tracker logged in homepage](https://i.imgur.com/w7IZzVH.png)
+![Character tracker logged in homepage](src/assets/HomePage.png)
 
 ## Getting started
 You can find our [deployed site here](https://character-tracker.netlify.app/)
