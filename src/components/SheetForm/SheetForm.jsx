@@ -1,4 +1,6 @@
 import { useState, useEffect } from 'react'
+import Select from 'react-select'
+import styles from '/src/components/SheetForm/sheetform.module.css'
 
 const blankSheet = {
   name: '',
@@ -8,14 +10,17 @@ const blankSheet = {
   baseAtk: 0,
   baseDef: 0,
   baseMagic: 0,
-}
+  equips: [],
+};
 
 const SheetForm = (props) => {
   const sheet = props.sheet;
-  const [formData, setFormData] = useState(blankSheet)
+  const [formData, setFormData] = useState(blankSheet);
 
   useEffect(() => {
     const setEditSheet = async () => {
+      const currEquips = sheet.equips.map(e => ({value: e._id, label: e.name}));
+
       const newFormData = {
         name: sheet.name,
         level: sheet.level,
@@ -24,7 +29,8 @@ const SheetForm = (props) => {
         baseAtk: sheet.baseAtk,
         baseDef: sheet.baseDef,
         baseMagic: sheet.baseMagic,
-      }
+        equips: currEquips,
+      };
       setFormData(newFormData);
     }
     if (sheet) {
@@ -32,14 +38,19 @@ const SheetForm = (props) => {
     } else {
       return () => setFormData(blankSheet);
     }
-  }, [sheet])
+  }, [sheet, props.equips]);
 
   const handleChange = (evt) => {
-    setFormData({ ...formData, [evt.target.name]: evt.target.value })
+    setFormData({ ...formData, [evt.target.name]: evt.target.value });
+  }
+
+  const handleMultiSelect = (selected) => {
+    setFormData({ ...formData, equips: selected });
   }
 
   const handleSubmit = (evt) => {
-    evt.preventDefault()
+    evt.preventDefault();
+    formData.equips = formData.equips.map((e) => e.value);
     if (sheet) {
       props.handleUpdateSheet(formData, sheet._id);
     } else {
@@ -47,12 +58,16 @@ const SheetForm = (props) => {
     }
   }
 
+  const equipOptions = props.equips.map((equip) => (
+    { value: equip._id, label: equip.name }
+  ));
+
   return (
     <main>
       <h1>{sheet ? 'Edit Sheet' : 'New Sheet'}</h1>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className={styles.form}>
         <label htmlFor='name-input'>Name</label>
-        <input
+        <input className={styles.input}
           required
           type='text'
           name='name'
@@ -61,7 +76,7 @@ const SheetForm = (props) => {
           onChange={handleChange}
         />
         <label htmlFor='level-input'>Level</label>
-        <input
+        <input className={styles.input}
           required
           type='number'
           name='level'
@@ -70,7 +85,7 @@ const SheetForm = (props) => {
           onChange={handleChange}
         />
         <label htmlFor='class-input'>Class</label>
-        <input
+        <input className={styles.input}
           required
           type='text'
           name='class'
@@ -79,7 +94,7 @@ const SheetForm = (props) => {
           onChange={handleChange}
         />
         <label htmlFor='baseHP-input'>baseHP</label>
-        <input
+        <input className={styles.input}
           required
           type='number'
           name='baseHP'
@@ -88,7 +103,7 @@ const SheetForm = (props) => {
           onChange={handleChange}
         />
         <label htmlFor='baseAtk-input'>baseAtk</label>
-        <input
+        <input className={styles.input}
           required
           type='number'
           name='baseAtk'
@@ -97,7 +112,7 @@ const SheetForm = (props) => {
           onChange={handleChange}
         />
         <label htmlFor='baseDef-input'>baseDef</label>
-        <input
+        <input className={styles.input}
           required
           type='number'
           name='baseDef'
@@ -106,7 +121,7 @@ const SheetForm = (props) => {
           onChange={handleChange}
         />
         <label htmlFor='baseMagic-input'>baseMagic</label>
-        <input
+        <input className={styles.input}
           required
           type='number'
           name='baseMagic'
@@ -114,7 +129,18 @@ const SheetForm = (props) => {
           value={formData.baseMagic}
           onChange={handleChange}
         />
-        <button type='submit'>{sheet ? 'Update Sheet' : 'Add Sheet'}</button>
+        <label htmlFor='equips-input' className={styles.equip}>Equipment
+          <Select
+            closeMenuOnSelect={false}
+            isClearable={true}
+            isSearchable={true}
+            isMulti={true}
+            options={equipOptions}
+            onChange={handleMultiSelect}
+            value={formData.equips}
+          />
+        </label>
+        <button type='submit' className={styles.button}>{sheet ? 'Update Sheet' : 'Add Sheet'}</button>
       </form>
     </main>
   )
