@@ -27,7 +27,7 @@ const EquipList = (props) => {
 
   return (
     <div className='margin'>
-      {user ? <li><Link to='/equips/new'>New Equip</Link></li> : null}
+      {user ? <button className={styles.button}><Link to='/equips/new'>New Equip</Link></button> : null}
       <table className={styles.table}>
         <tbody>
           <tr>
@@ -39,7 +39,7 @@ const EquipList = (props) => {
           </tr>
           {props.equips.map(equip =>
               <tr key={equip._id}>
-                <td onClick={() => props.handleSelect(equip)}><img src={imageFiles[equip.type]} alt="Weapon glyph" /></td>
+                <td onClick={() => props.handleSelect(equip)} className={styles.centered}><img src={imageFiles[equip.type]} alt="Weapon glyph" /></td>
                 <td onClick={() => props.handleSelect(equip)}>{equip.name}</td>
                 <td onClick={() => props.handleSelect(equip)}>{equip.type}</td>
                 <td onClick={() => props.handleSelect(equip)}>{`+${equip.statValue} ${equip.statModify}`}</td>
