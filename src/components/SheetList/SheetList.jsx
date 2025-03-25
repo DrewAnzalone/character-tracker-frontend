@@ -20,7 +20,7 @@ const SheetList = (props) => {
             to={`/sheets/${sheet._id}`}
           >
             <h3 className={styles.h3}>{sheet.name}</h3>
-            <img src={images.Character} alt="" />
+            <img src={images.Character} alt="Character placeholder" />
             <h3 className={styles.h3}>Level {sheet.level} {sheet.class}</h3>
             <ul className={styles.ul}>
               <li className={styles.li}>HP: {stats.baseHP}</li>
