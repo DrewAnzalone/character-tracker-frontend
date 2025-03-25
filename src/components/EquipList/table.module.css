@@ -2,9 +2,24 @@ table {
     border: 1px solid;
     border-collapse: collapse;
     padding: 2px;
-    width: 100%;
-  }
-  th, td {
+}
+
+th,
+td {
     border: 1px solid;
     padding: 3px 10px 3px 10px;
+}
+
+.button {
+    padding: 10px;
+    background-color: #000000;
+    color: white;
+    border-radius: 30px;
+    border: none;
+    margin: 15px 15px 15px 15px;
+    font-size: 1.1rem;
   }
+
+  .button:hover {
+    background-color: rgb(176, 133, 226);
+}
