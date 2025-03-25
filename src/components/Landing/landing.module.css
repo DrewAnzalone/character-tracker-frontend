@@ -1,6 +1,7 @@
-body {
+main {
     display: grid;
     place-items: center;
+    margin-top: 380px;
 }
 
 h1 {
@@ -17,19 +18,19 @@ h1 {
 }
 
 .title {
-    color: rgb(216, 18, 84);
+    color: rgb(176, 133, 226);
 }
 
 p {
     text-align: center;
-    margin: 0 20px 0 20px;
+    margin: 5px 20px 5px 20px;
     font-size: 1.4em;
 }
 
 .link {
-    color: rgb(216, 18, 84)
+    color: rgb(176, 133, 226)
 }
 
 .link:hover {
-    color: rgb(214, 61, 112)
+    color: rgb(132, 64, 209)
 }
