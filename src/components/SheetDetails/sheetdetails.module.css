@@ -72,6 +72,7 @@
 
 .equipItem:hover {
     transform: scale(1.02);
+    background-color: rgba(84, 84, 134, 0.336);
 }
 
 .buttonContainer {
