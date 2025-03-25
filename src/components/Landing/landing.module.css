@@ -1,0 +1,30 @@
+h1 {
+    display: grid;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-weight: bold;
+    margin: 160px- 20px 0 20px;
+}
+
+.header {
+    font-size: 100px;
+}
+
+.title {
+    color: rgb(176, 133, 226);
+}
+
+p {
+    text-align: center;
+    margin: 5px 20px 5px 20px;
+    font-size: 1.4em;
+}
+
+.link {
+    color: rgb(176, 133, 226)
+}
+
+.link:hover {
+    color: rgb(132, 64, 209)
+}
