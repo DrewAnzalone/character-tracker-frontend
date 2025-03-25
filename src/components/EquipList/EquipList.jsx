@@ -23,7 +23,7 @@ const imageFiles = {
 const EquipList = (props) => {
   return (
     <div className='margin'>
-    <li><Link to='/equips/new'>New Equip</Link></li>
+ <li><Link to='/equips/new'>New Equip</Link></li>
       <table className={styles.table}>
         <tbody>
           <tr>
