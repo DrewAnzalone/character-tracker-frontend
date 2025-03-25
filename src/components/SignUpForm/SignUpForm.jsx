@@ -5,6 +5,9 @@ import { signUp } from '../../services/authService';
 
 import { UserContext } from '../../contexts/UserContext';
 
+import styles from '/src/components/SignUpForm/signupform.module.css'
+
+
 const SignUpForm = () => {
   const navigate = useNavigate();
   const { setUser } = useContext(UserContext);
@@ -38,13 +41,13 @@ const SignUpForm = () => {
   };
 
   return (
-    <main>
-      <h1>Sign Up</h1>
+    <main className={styles.signup}>
+      <h1 className={styles.h1}>Sign Up</h1>
       <p>{message}</p>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className={styles.form}>
         <div>
           <label htmlFor='username'>Username:</label>
-          <input
+          <input className={styles.input}
             type='text'
             id='name'
             value={username}
@@ -55,7 +58,7 @@ const SignUpForm = () => {
         </div>
         <div>
           <label htmlFor='password'>Password:</label>
-          <input
+          <input className={styles.input}
             type='password'
             id='password'
             value={password}
@@ -66,7 +69,7 @@ const SignUpForm = () => {
         </div>
         <div>
           <label htmlFor='confirm'>Confirm Password:</label>
-          <input
+          <input className={styles.input}
             type='password'
             id='confirm'
             value={passwordConf}
@@ -76,8 +79,8 @@ const SignUpForm = () => {
           />
         </div>
         <div>
-          <button disabled={isFormInvalid()}>Sign Up</button>
-          <button onClick={() => navigate('/')}>Cancel</button>
+          <button className={styles.button} disabled={isFormInvalid()}>Sign Up</button>
+          <button className={styles.button} onClick={() => navigate('/')}>Cancel</button>
         </div>
       </form>
     </main>
