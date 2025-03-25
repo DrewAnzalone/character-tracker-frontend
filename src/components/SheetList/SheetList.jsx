@@ -5,7 +5,7 @@ import * as images from '../../assets';
 const SheetList = (props) => {
   return (
     <div className='margin'>
-      <Link to='/sheets/new' onClick={() => props.handleSelect(null)}>Create Sheet</Link>
+      <button className={styles.button}><Link to='/sheets/new' onClick={() => props.handleSelect(null)}>Create Sheet</Link></button>
       <div className={styles.sheetgrid}>
         {props.sheets.map(sheet => {
           const stats = { baseHP: sheet.baseHP, baseAtk: sheet.baseAtk, baseDef: sheet.baseDef, baseMagic: sheet.baseMagic }
@@ -20,7 +20,7 @@ const SheetList = (props) => {
             to={`/sheets/${sheet._id}`}
           >
             <h3 className={styles.h3}>{sheet.name}</h3>
-            <img src={images.Character} alt="" />
+            <img src={images.Character} alt="Character placeholder" />
             <h3 className={styles.h3}>Level {sheet.level} {sheet.class}</h3>
             <ul className={styles.ul}>
               <li className={styles.li}>HP: {stats.baseHP}</li>

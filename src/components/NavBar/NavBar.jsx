@@ -23,9 +23,9 @@ const NavBar = () => {
         :
         <>
           <Link to='/' className={styles.h1}>Character Tracker</Link>
-          <Link to='/sign-in'>Sign In</Link>
-          <Link to='/sign-up'>Sign Up</Link>
-          <Link to='/equips'>Equips</Link>
+          <Link to='/sign-in' className={styles.a}>Sign In</Link>
+          <Link to='/sign-up' className={styles.a}>Sign Up</Link>
+          <Link to='/equips' className={styles.a}>Equips</Link>
         </>
       }
     </nav>

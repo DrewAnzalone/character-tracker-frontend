@@ -1,14 +1,11 @@
 import { useContext, useEffect, useState } from 'react';
 import { Navigate, Routes, Route, useNavigate } from 'react-router';
-// import { Link } from 'react-router';
 
 import NavBar from './components/NavBar/NavBar.jsx';
 import SignUpForm from './components/SignUpForm/SignUpForm.jsx';
 import SignInForm from './components/SignInForm/SignInForm.jsx';
 import Landing from './components/Landing/Landing.jsx';
-// import Dashboard from './components/Dashboard/Dashboard.jsx';
 import EquipList from './components/EquipList/EquipList.jsx';
-// import EquipDetails from './components/EquipDetails/EquipDetails.jsx';
 import EquipForm from './components/EquipForm/EquipForm.jsx';
 import SheetDetails from './components/SheetDetails/SheetDetails.jsx';
 import SheetList from './components/SheetList/SheetList.jsx';
@@ -68,7 +65,7 @@ const App = () => {
 
   const handleAddEquip = async (equipFormData) => {
     const newEquip = await equipService.create(equipFormData);
-    setEquips([newEquip, ...equips]);
+    setEquips([...equips, newEquip]);
     setSelectedEquip(newEquip);
     navigate(`/equips`);
   }
@@ -114,7 +111,6 @@ const App = () => {
         <Route path='/sign-up' element={<SignUpForm />} />
         <Route path='/sign-in' element={<SignInForm />} />
       </Routes>
-      {modalActive && <h1> modal active </h1>}
       {modalActive && <EquipModal equip={selectedEquip} handleModal={toggleModal} />}
     </>
   );
