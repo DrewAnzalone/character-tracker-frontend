@@ -1,6 +1,26 @@
 import './EquipModal.css'
+import * as images from '../../assets';
+
+const imageFiles = {
+  "Armor": images.Armor,
+  "Axe": images.Axe,
+  "Bow": images.Bow,
+  "Dagger": images.Dagger,
+  "Flail": images.Flail,
+  "Hammer": images.Hammer,
+  "Mace": images.Mace,
+  "Nunchucks": images.Nunchucks,
+  "Shield": images.Shield,
+  "Shortsword": images.Shortsword,
+  "Spear": images.Spear,
+  "Staff": images.Staff,
+  "Sword": images.Sword,
+  "Two-hand": images.TwoHand,
+  "XBow": images.XBow,
+};
 
 const EquipModal = (props) => {
+
   return (
     <div
       className="modal-wrapper"
@@ -10,9 +30,8 @@ const EquipModal = (props) => {
         className="modal"
         onClick={e => e.stopPropagation()}
       >
-        <p>
-          CONTENT
-        </p>
+        <img src={imageFiles[props.equip.type]} alt="Weapon glyph" />
+        
       </div>
     </div>
   );
