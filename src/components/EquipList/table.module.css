@@ -16,10 +16,14 @@ td {
     color: white;
     border-radius: 30px;
     border: none;
-    margin: 15px 15px 15px 15px;
     font-size: 1.1rem;
-  }
+    margin-bottom: 10px;
+}
 
-  .button:hover {
+.button:hover {
     background-color: rgb(176, 133, 226);
+}
+
+.centered {
+    text-align: center;
 }

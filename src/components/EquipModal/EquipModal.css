@@ -15,11 +15,15 @@
     margin: 15% auto;
     padding: 20px;
     border: 1px solid #888;
-    width: 80%;
+    width: 50%;
     display: flex;
     color: black;
     gap: 20px;
     border-radius: 10px;
+}
+
+.modal > * {
+    margin-right: 100px;;
 }
 
 .modal img {

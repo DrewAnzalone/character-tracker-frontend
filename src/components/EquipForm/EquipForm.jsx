@@ -19,9 +19,7 @@ const EquipForm = (props) => {
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
-    console.log("hello")
     if (user) {
-      console.log("valid")
       props.handleAddEquip(formData);
     }
   };
