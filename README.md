@@ -8,7 +8,6 @@ You can find our [deployed site here](https://character-tracker.netlify.app/)
 
 Our planning materials [can be found here](https://trello.com/b/IFw6AVnT/charcter-gear-wip-name)
 
-
 ## Attributions
 ### Online documentation
  - Our group used websites like [MDN](https://developer.mozilla.org/en-US/) and [W3] (https://www.w3schools.com/) throughout our project whenever we got stuck.
@@ -28,3 +27,13 @@ Asserts weres inspired and modified from:
 3. **Javascript**
 4. **HTML**
 5. **CSS**
+
+## Stretch Goals
+Theres a few things we would like to add to our website to make it more functionally complete
+
+1. **Expanding what a user can add to an item**
+    * Adding a way for a user to add abilities to an item and possibly even their character.
+2. **Creating Parties**
+    * Allowing a user to make one or more parties that are made up of the character sheets that they have created.
+3. **Social Features**
+    * Allow sharing of parties or characters.
