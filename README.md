@@ -1,19 +1,13 @@
 # Character Tracker
-We chose to make a 
 
-![Sopranos Hangman Website](https://i.imgur.com/RwmSnml.png)
+Our group chose to make an app where users can create character sheets and add items (equips) to their sheet to dynamically update their stats. Our project allow users to create, read, update and delete these sheets while allowing users to create/add their own equips, or use equips already in our database.
+
+![Character tracker logged in homepage](https://i.imgur.com/w7IZzVH.png)
 
 ## Getting started
-You can find the [deployed game here](https://michaelmcbride113.github.io/Sopranos-hangman-game/)
+You can find our [deployed site here](https://character-tracker.netlify.app/)
 
-My planning materials [can be found here](https://github.com/michaelmcbride113/Sopranos-hangman-game/blob/main/js/psuedocode.js)
-
-
-## Attributions
-### Hangman images
- - I was having trouble finding sequential updated hangman images for my game. I ended up finding a [Javascript hangman game](https://www.geeksforgeeks.org/build-a-hangman-game-using-javascript/?utm_source=auth&utm_medium=saved&utm_campaign=articles) through Google and used their images for my game.
- ### MDN
--  [MDN](https://developer.mozilla.org/en-US/) - I used MDN when I was unable to come up with/find code that's applicable in my lecture notes or lab work. For example, I could not figure out how to update my hangman images with an incorrect guess so I used the [innerHTML element](https://developer.mozilla.org/en-US/docs/Web/API/Element/innerHTML) which I found on MDN.
+Our planning materials [can be found here](https://trello.com/b/IFw6AVnT/charcter-gear-wip-name)
 
 ## Technologies Used: 
 1. **JSX**
@@ -38,3 +32,10 @@ Theres a few things we would like to add to our website to make it more user-fri
 
 2. **Creating Parties**
     * Allowing a user to make one or more parties that are made up of the character sheets that they have created
+
+## Attributions
+
+### Online documentation
+ - Our group used websites like [MDN](https://developer.mozilla.org/en-US/) and [W3] (https://www.w3schools.com/) throughout our project whenever we got stuck.
+ ### Class notes and labs
+-  We used class notes like the [Hoot API Back-end](https://github.com/michaelmcbride113/express-api-hoot-back-end) and labs like the [React Jukebox front end lab](https://github.com/michaelmcbride113/react-jukebox-front-end-lab) for guidance when styling our application
