@@ -1,9 +1,9 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
+import { UserContext } from '../../contexts/UserContext';
 import styles from '/src/components/EquipForm/equipform.module.css'
 
-
-
 const EquipForm = (props) => {
+  const { user } = useContext(UserContext);
   const [formData, setFormData] = useState({
     name: '',
     type: 'Armor',
@@ -17,12 +17,14 @@ const EquipForm = (props) => {
 
 const handleSubmit = (evt) => {
     evt.preventDefault();
-    props.handleAddEquip(formData);
+    if (user) {
+      props.handleAddEquip(formData);
+    }
   };
 
 
   return (
-    <main>
+    <div className='margin'>
       <form onSubmit={handleSubmit} className={styles.form}>
         <label htmlFor='name-input'>Name</label>
         <input className={styles.input}
@@ -78,9 +80,9 @@ const handleSubmit = (evt) => {
           value={formData.statValue}
           onChange={handleChange}
         />
-        <button type='submit' className={styles.button}>Add Equip</button>
+        <button type='submit' className={`${user ? '' : 'disabled'} ${styles.button}`} disabled={!!user}>Add Equip</button>
       </form>
-    </main>
+    </div>
   );
 };
 

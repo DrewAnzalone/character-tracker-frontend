@@ -1,4 +1,6 @@
+import { useContext } from 'react';
 import { Link } from 'react-router';
+import { UserContext } from '../../contexts/UserContext';
 import styles from '/src/components/EquipList/table.module.css'
 import * as images from '../../assets';
 
@@ -21,9 +23,11 @@ const imageFiles = {
 };
 
 const EquipList = (props) => {
+  const { user } = useContext(UserContext);
+
   return (
     <div className='margin'>
-    <li><Link to='/equips/new'>New Equip</Link></li>
+      {user ? <li><Link to='/equips/new'>New Equip</Link></li> : null}
       <table className={styles.table}>
         <tbody>
           <tr>
