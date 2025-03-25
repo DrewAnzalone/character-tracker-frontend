@@ -13,26 +13,22 @@ const NavBar = () => {
   };
 
   return (
-    <>
-    <nav className={styles.nav}>
-      <h1 className={styles.h1}>Character Tracker</h1>
+    <nav>
       {user ?
-      
-        <ul className={styles.ul}>
-          <li>Welcome, {user.username}</li>
-          <li><Link to='/sheets'>Dashboard</Link></li>
-          <li><Link to='/' onClick={handleSignOut}>Sign Out</Link></li>
-          <li><Link to='/equips'>Equips</Link></li>
-        </ul>
+        <>
+          <Link to='/sheets' className={styles.h1}>Character Tracker</Link>
+          <Link to='/' onClick={handleSignOut} className={styles.a}>Sign Out</Link>
+          <Link to='/equips' className={styles.a}>Equips</Link>
+        </>
         :
-        <ul className={styles.navbar}>
-          <li><Link to='/'>Home</Link></li>
-          <li><Link to='/sign-in'>Sign In</Link></li>
-          <li><Link to='/sign-up'>Sign Up</Link></li>
-        </ul>
+        <>
+          <Link to='/' className={styles.h1}>Character Tracker</Link>
+          <Link to='/sign-in'>Sign In</Link>
+          <Link to='/sign-up'>Sign Up</Link>
+          <Link to='/equips'>Equips</Link>
+        </>
       }
     </nav>
-      </>
   );
 };
 
