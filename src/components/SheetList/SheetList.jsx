@@ -4,7 +4,7 @@ import * as images from '../../assets';
 
 const SheetList = (props) => {
   return (
-    <>
+    <div className='margin'>
       <Link to='/sheets/new' onClick={() => props.handleSelect(null)}>Create Sheet</Link>
       <div className={styles.sheetgrid}>
         {props.sheets.map(sheet => {
@@ -33,7 +33,7 @@ const SheetList = (props) => {
         }
         )}
       </div>
-    </>
+    </div>
   )
 };
 
