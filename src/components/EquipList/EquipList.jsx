@@ -1,4 +1,6 @@
+import { useContext } from 'react';
 import { Link } from 'react-router';
+import { UserContext } from '../../contexts/UserContext';
 import styles from '/src/components/EquipList/table.module.css'
 import * as images from '../../assets';
 
@@ -21,9 +23,11 @@ const imageFiles = {
 };
 
 const EquipList = (props) => {
+  const { user } = useContext(UserContext);
+
   return (
     <div className='margin'>
- <li><Link to='/equips/new'>New Equip</Link></li>
+      {user ? <li><Link to='/equips/new'>New Equip</Link></li> : null}
       <table className={styles.table}>
         <tbody>
           <tr>
@@ -34,11 +38,11 @@ const EquipList = (props) => {
             <th>Delete?</th>
           </tr>
           {props.equips.map(equip =>
-              <tr key={equip._id} onClick={() => props.handleSelect(equip)}>
-                <td><img src={imageFiles[equip.type]} alt="Weapon glyph" /></td>
-                <td>{equip.name}</td>
-                <td>{equip.type}</td>
-                <td>{`+${equip.statValue} ${equip.statModify}`}</td>
+              <tr key={equip._id}>
+                <td onClick={() => props.handleSelect(equip)}><img src={imageFiles[equip.type]} alt="Weapon glyph" /></td>
+                <td onClick={() => props.handleSelect(equip)}>{equip.name}</td>
+                <td onClick={() => props.handleSelect(equip)}>{equip.type}</td>
+                <td onClick={() => props.handleSelect(equip)}>{`+${equip.statValue} ${equip.statModify}`}</td>
                 <td><button onClick={() => props.handleDeleteEquip(equip._id)}>Delete</button></td>
               </tr>
           )}

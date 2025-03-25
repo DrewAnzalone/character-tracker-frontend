@@ -68,7 +68,7 @@ const App = () => {
 
   const handleAddEquip = async (equipFormData) => {
     const newEquip = await equipService.create(equipFormData);
-    setEquips([newEquip, ...equips]);
+    setEquips([...equips, newEquip]);
     setSelectedEquip(newEquip);
     navigate(`/equips`);
   }
@@ -114,7 +114,7 @@ const App = () => {
         <Route path='/sign-up' element={<SignUpForm />} />
         <Route path='/sign-in' element={<SignInForm />} />
       </Routes>
-      {modalActive && <h1> modal active </h1>}
+      {/* {modalActive && <h1> modal active </h1>} */}
       {modalActive && <EquipModal equip={selectedEquip} handleModal={toggleModal} />}
     </>
   );
