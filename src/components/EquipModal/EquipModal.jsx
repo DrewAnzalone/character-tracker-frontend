@@ -30,8 +30,13 @@ const EquipModal = (props) => {
         className="modal"
         onClick={e => e.stopPropagation()}
       >
+        <div>
         <img src={imageFiles[props.equip.type]} alt="Weapon glyph" />
-        
+        </div>
+        <div>
+          <h2>{props.equip.name}</h2>
+        <p>{`+${props.equip.statValue} ${props.equip.statModify}`}</p>
+        </div>
       </div>
     </div>
   );
